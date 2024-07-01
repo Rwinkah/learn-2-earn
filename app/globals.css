@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 296, 85%, 29%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 294, 56%, 96%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 294, 56%, 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 294, 56%, 96%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 296, 85%, 29%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 294, 56%, 96%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 294, 56%, 96%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 294, 56%, 96%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 294, 56%, 96%;
+    --input: 294, 56%, 96%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+
+
+/* Custom scrollbar for #content-wrapper */
+::-webkit-scrollbar {
+  width: 10px; /* Making the scrollbar thin */
+}
+
+::-webkit-scrollbar-track {
+  background: black; /* Transparent track */
+  /* box-shadow: inset 0 0 0 2px white; */
+}
+
+::-webkit-scrollbar-thumb {
+  background: white; /* Use primary for the thumb */
+  border-radius: 40px; /* Optional: Adds roundness to the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #761D99; /* Darken thumb on hover, adjust as needed */
+}
+
+/* Firefox */
+ * {
+  scrollbar-width: auto; /* "auto" or "thin" */
+  scrollbar-color: var(--primary) transparent; /* thumb and track color */
+}
+
+/* lesson styling */
+/*>>>>>>>>>>>>>>>>>>>>>>>>>*/
+.Normie {
+  color: #26d153;
+  text-decoration: underline;
+}
+.Amateur {
+  color: #3c7aca;
+  text-decoration: underline;
+}
+
+.Expert {
+  color: #ca983c;
+  text-decoration: underline;
+}
+
+.Idolo {
+  color: #d01cd0;
+  text-decoration: underline;
+}
+
+.Intermediate {
+  color: #a9c615;
+  text-decoration: underline;
+}
+
+
+/*>>>>>>>>>>>>>>>>>>>>>>>>>*/
+
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
