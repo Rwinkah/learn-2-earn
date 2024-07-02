@@ -1,10 +1,7 @@
-import CourseContent from "@/app/_components/coursecontent-card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import lessons from "@/data/course-info";
 import { ThumbsDownIcon, ThumbsUpIcon } from "lucide-react";
 import Link from 'next/link'
 import { Metadata } from "next";
-import { MdQuiz } from "react-icons/md";
 import { Link as Linkicon } from "lucide-react";
 export const metadata: Metadata = {
   title: "Lessons",

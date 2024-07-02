@@ -29,7 +29,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <div className="border-b-[1px] border-gray-500 w-full p-6 flex flex-col gap-8">
             <h1 className='text-white text-2xl font-semibold mb-10'>Welcome <span className='text-primaryLight'>UcantCME</span></h1>  
             <span className='flex gap-2 items-center bg-[#070707] p-2 border-[1px] border-gray-500 h-20'>      
-              <img src='/eth.jpeg' className='h-14 w-14 rounded-full border-2'/>
+              <img src='/eth.jpeg' alt='ether' className='h-14 w-14 rounded-full border-2'/>
               <div >
                 <h6 className="text-[18px] font-bold">UcantCME</h6>
                 <h6 className="text-sm font-light text-primaryLight">0x12uj98pob5902329pl2</h6>

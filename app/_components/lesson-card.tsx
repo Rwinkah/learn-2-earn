@@ -14,12 +14,14 @@ import play from "@/assets/images/PlayCircle.png";
 import document from "@/assets/images/Document.png";
 import Image, { StaticImageData } from "next/image";
 
+import type { Questions } from "@/data/course-info";
+
 interface lessonCardProps {
   id: string;
   title: string;
   creator: string;
   level: difficulty;
-  quiz: string
+  quiz: Questions[]
 
   description: string
   img: StaticImageData
