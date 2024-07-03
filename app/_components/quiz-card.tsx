@@ -36,15 +36,15 @@ export default function QuizCard({ ques, ans, alt1, alt2, updateAnswer, question
     };
 
     return (
-        <div id="quiz-card" className="bg-black text-white border-2 rounded-lg w-[80vw] lg:w-[70vw] h-[500px] p-20 flex flex-col gap-10">
-            <h1 className="text-primary font-bold text-2xl">
+        <div id="quiz-card" className="bg-black text-white min-h-[70vh] h-auto flex-grow border-2 rounded-lg w-[90vw] lg:w-[70vw] lg:h-[500px] p-20 flex flex-col gap-10">
+            <h1 className="text-primary font-bold md:text-2xl">
                 {ques}
             </h1>
             {shuffledOptions.map((option, index) => (
                 <button
                     key={index}
                     onClick={() => handleSelectAnswer(option)}
-                    className={`border-white border-[1px] min-w-1/4 w-fit text-left p-2 rounded-lg font-semibold ${selectedOption === option ? 'bg-primary text-white border-none shadow-lg' : ''}`} // Step 2
+                    className={`border-white -[1px] w-fit text-left p-2 rounded-lg font-semibold md:text-base text-sm ${selectedOption === option ? 'bg-primary text-white border-none shadow-2xl' : ''}`} // Step 2
                 >
                     {option}
                 </button>
