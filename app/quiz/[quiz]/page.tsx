@@ -61,7 +61,7 @@ export interface Answer {
                     <QuizCard key={index} {...item} questionIndex={index} updateAnswer={updateAnswer} />
                   ))}
                 </div>
-                <button className="text-white bg-primary w-2/3 lg:w-1/5 self-center rounded-3xl text-2xl font-semibold p-4" onClick={handleSubmit}>Submit</button>
+                <button className="text-white bg-primary w-2/3 lg:w-1/5 self-center rounded-3xl text-2xl font-semibold p-4 mb-[1000px]" onClick={handleSubmit}>Submit</button>
               </div>
             ) : (
                 <div id="quiz-header" className=" bg-[#2a0b38] pt-10 h-[100vh] self-center flex flex-col items-center gap-4">

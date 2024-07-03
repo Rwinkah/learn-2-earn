@@ -49,7 +49,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
 
         </RespContainer>
-        <RespContainer hide={false} class_full="display-none" class_sm="mt-20 ">
+        <RespContainer hide={false} class_full="hidden" class_sm="mt-20 ">
           <div className="shadow  h-fit fixed z-500 bottom-0 left-0 right-0 mt-[3rem] border-t-[1px] border-gray-500">
             <div className="bg-black w-full flex justify-around items-center h-[6rem]">
               <Link href={"/home"}>
