@@ -49,18 +49,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
 
         </RespContainer>
-        <RespContainer hide={false} class_full="display-none" class_sm="">
-          <div className="shadow  h-fit fixed z-500 bottom-0 left-0 right-0 mt-[3rem]">
+        <RespContainer hide={false} class_full="display-none" class_sm="mt-20 ">
+          <div className="shadow  h-fit fixed z-500 bottom-0 left-0 right-0 mt-[3rem] border-t-[1px] border-gray-500">
             <div className="bg-black w-full flex justify-around items-center h-[6rem]">
               <Link href={"/home"}>
               <div className="flex items-center justify-start p-2 cursor-pointer">
-              <HomeIcon width={40} height={40} color="white"/> 
+              <HomeIcon width={20} height={20} color="white"/> 
               </div>
               </Link>
 
               <Link href={"/settings"}>
                 <div className="flex items-center justify-start p-2 cursor-pointer">
-                <GearIcon width={40} height={40} color="white"/> 
+                <GearIcon width={20} height={20} color="white"/> 
               </div>
               </Link>
 

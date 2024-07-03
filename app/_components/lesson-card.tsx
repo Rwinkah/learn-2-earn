@@ -31,7 +31,7 @@ interface lessonCardProps {
 
 export default function LessonCard({ title, id, creator, level, quiz, description, img, tags }:lessonCardProps) {
   return (
-    <Card className='w-4/5 flex flex-col border-[1px] border-gray-500  pt-4 min-h-[90vh] p-8  bg-[#070707] text-white'>
+    <Card className='w-4/5 flex flex-col border-[1px] border-gray-500  pt-4 max-h-[60vh] lg:max-h-fit p-8  bg-[#070707] text-white'>
       <Link className="min-h-[90vh]" href={`/lessons/${id}`}>
         <div id='header' className="flex flex-col gap-1">
           <h2 className="font-medium text-sm">
@@ -55,6 +55,5 @@ export default function LessonCard({ title, id, creator, level, quiz, descriptio
         </div>
       </Link>      
     </Card>
-
   );
 }

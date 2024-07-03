@@ -38,7 +38,7 @@ export default function QuizCard({ ques, ans, alt1, alt2, updateAnswer, question
 
     
     return (
-        <div id="quiz-card" className=" hover:shadow-2xl hover:scale-90 transition-all duration-150 ease-in-out bg-black text-white min-h-[70vh] h-auto flex-grow border-2 rounded-lg w-[90vw] lg:w-[70vw] lg:h-[500px] p-20 flex flex-col gap-10">
+        <div id="quiz-card" className=" hover:shadow-2xl hover:scale-90 transition-all duration-150 ease-in-out bg-black text-white  min-h-[70vh] h-auto  border-2 rounded-lg w-[90vw] lg:w-[70vw] lg:h-[500px] p-20 flex flex-col gap-10">
             <h1 className="text-primary font-bold text-xl md:text-3xl mb-5">
                 {ques}
             </h1>
@@ -47,7 +47,7 @@ export default function QuizCard({ ques, ans, alt1, alt2, updateAnswer, question
                     variant={'quiz'}
                     key={index}
                     onClick={() => handleSelectAnswer(option)}
-                    className={`  w-fit text-left p-2 rounded-lg font-semibold md:text-lg text-base ${selectedOption === option ? 'bg-primary text-white border-none shadow-2xl' : ''}`} // Step 2
+                    className={`w-fit text-wrap text-left p-2 rounded-lg font-semibold md:text-lg text-sm ${selectedOption === option ? 'bg-primary text-white border-none shadow-2xl' : ''}`} // Step 2
                 >
                     {option}
                 </Button>
