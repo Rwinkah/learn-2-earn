@@ -44,9 +44,9 @@ export default function LessonCard({ title, id, creator, level, quiz, descriptio
         <h2 className="mb-10">{description}</h2>
         {/* <img src={img} /> */}
         <ImageWithSkeleton src={img} alt="alt" clas="lop"/>
-        <div className="flex gap-2 mt-8">
+        <div className="lg:flex gap-2 mt-8">
           <h3 className="text-white">Tags:</h3>
-          <div id="tags" className="w-full flex gap-2">
+          <div id="tags" className="w-full flex gap-2 flex-wrap">
             {tags.map((tag) => (
               <h4 key={tag} className="text-primaryLight font-semibold">{tag}</h4>
             ))}

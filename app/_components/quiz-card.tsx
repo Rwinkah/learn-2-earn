@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { Questions } from "@/data/course-info"
 import type { Answer } from '../quiz/[quiz]/page';
+import { Button } from '@/components/ui/button';
 
 interface QuizCardProps extends Questions {
   updateAnswer: (questionIndex: number, isCorrect: number) => void;
@@ -35,19 +36,21 @@ export default function QuizCard({ ques, ans, alt1, alt2, updateAnswer, question
         updateAnswer(questionIndex, isCorrect);
     };
 
+    
     return (
-        <div id="quiz-card" className="bg-black text-white min-h-[70vh] h-auto flex-grow border-2 rounded-lg w-[90vw] lg:w-[70vw] lg:h-[500px] p-20 flex flex-col gap-10">
-            <h1 className="text-primary font-bold md:text-2xl">
+        <div id="quiz-card" className=" hover:shadow-2xl hover:scale-90 transition-all duration-150 ease-in-out bg-black text-white min-h-[70vh] h-auto flex-grow border-2 rounded-lg w-[90vw] lg:w-[70vw] lg:h-[500px] p-20 flex flex-col gap-10">
+            <h1 className="text-primary font-bold text-xl md:text-3xl mb-5">
                 {ques}
             </h1>
             {shuffledOptions.map((option, index) => (
-                <button
+                <Button
+                    variant={'quiz'}
                     key={index}
                     onClick={() => handleSelectAnswer(option)}
-                    className={`border-white -[1px] w-fit text-left p-2 rounded-lg font-semibold md:text-base text-sm ${selectedOption === option ? 'bg-primary text-white border-none shadow-2xl' : ''}`} // Step 2
+                    className={`  w-fit text-left p-2 rounded-lg font-semibold md:text-lg text-base ${selectedOption === option ? 'bg-primary text-white border-none shadow-2xl' : ''}`} // Step 2
                 >
                     {option}
-                </button>
+                </Button>
             ))}
 
         </div>

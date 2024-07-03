@@ -24,7 +24,7 @@ export default function Dashboard() {
     <div className="flex-col flex-shrink w-full h-[100vh]  text-black">
       {/* <h1 className="font-bold text-4xl mb-6 text-center text-white">Welcome Learner!</h1> */}
       <Tabs defaultValue="lessons" className="w-full" id="tab-element">
-        <TabsList className='w-full z-[1000] item-top justify-center border-b border-gray-500 h-11'>
+        <TabsList className='w-full z-[1000] item-top justify-center border-none  lg:border-gray-500 h-11'>
           <TabsTrigger className="text-lg" value="lessons">Lessons</TabsTrigger>
           <TabsTrigger  className="text-lg" value="timeline"> Timeline</TabsTrigger>
         </TabsList>

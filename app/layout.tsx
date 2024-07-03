@@ -40,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="max-w-[100vw] max-h-[100vh] overflow-hidden">
       <body>{children}</body>
     </html>
   );
