@@ -41,7 +41,7 @@ export default function Page({ params }: { params: { lesson: string } }) {
             <p>{lessonData.article.summary.text}</p>
           </div>
 
-          <Link href='' className="flex self-center gap-4 font-bold text-lg text-primaryLight">
+          <Link href={`/quiz/${lessonData.id}`} className="flex self-center gap-4 font-bold text-lg text-primaryLight">
             Take the quiz
             <Linkicon/>
            </Link>

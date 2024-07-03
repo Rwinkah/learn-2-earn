@@ -32,7 +32,7 @@ interface lessonCardProps {
 export default function LessonCard({ title, id, creator, level, quiz, description, img, tags }:lessonCardProps) {
   return (
     <Card className='w-4/5 flex flex-col border-[1px] border-gray-500  pt-4 min-h-[90vh] p-8  bg-[#070707] text-white'>
-      <Link href={`/lessons/${id}`}>
+      <Link className="min-h-[90vh]" href={`/lessons/${id}`}>
         <div id='header' className="flex flex-col gap-1">
           <h2 className="font-medium text-sm">
               {creator} | <span className={`${level}`}>{level}</span>
