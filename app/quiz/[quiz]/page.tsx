@@ -48,7 +48,7 @@ export interface Answer {
         //   }, [submitted, router]);
 
           return (
-            submitted ? (
+            !submitted ? (
               <div className="bg-[#2a0b38] w-full h-[100vh] overflow-scroll flex flex-col p-10 gap-20 pt-10">
                 <div id="quiz-header" className="self-center flex flex-col items-center gap-4">
                   <h1 className="font-bold text-4xl text-white">
