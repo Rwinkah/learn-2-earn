@@ -2,10 +2,10 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "courses",
-  openGraph: { title: "courses" },
-  twitter: { title: "courses" },
+  openGraph: { title: "lessons" },
+  twitter: { title: "lessons" },
 };
 
-export default function Courses() {
+export default function Lessons() {
   return null;
 }

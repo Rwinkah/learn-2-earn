@@ -47,7 +47,7 @@ export default function QuizCard({ ques, ans, alt1, alt2, updateAnswer, question
                     variant={'quiz'}
                     key={index}
                     onClick={() => handleSelectAnswer(option)}
-                    className={`w-fit text-wrap text-left p-2 rounded-lg font-semibold md:text-lg text-sm ${selectedOption === option ? 'bg-primary text-white border-none shadow-2xl' : ''}`} // Step 2
+                    className={`w-fit text-wrap text-left p-2 rounded-lg font-semibold md:text-lg text-sm h-fit ${selectedOption === option ? 'bg-primary text-white border-none shadow-2xl' : ''}`} // Step 2
                 >
                     {option}
                 </Button>

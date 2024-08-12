@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: #130C16;
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
@@ -70,7 +70,7 @@
 
 /* Custom scrollbar for #content-wrapper */
 ::-webkit-scrollbar {
-  width: 10px; /* Making the scrollbar thin */
+  width: 4px; /* Making the scrollbar thin */
 }
 
 ::-webkit-scrollbar-track {

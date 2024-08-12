@@ -32,10 +32,12 @@ export interface Answer {
 
     const handleSubmit = () => {
         // Calculate the final score by summing up the 'isCorrect' values in the answers array
-        const finalScore = answers.reduce((acc, answer) => acc + answer.isCorrect, 0);
-        setScore(finalScore)
+        // Treat null or undefined values as 0
+        const finalScore = answers.reduce((acc, answer) => acc + (answer?.isCorrect || 0), 0);
+        setScore(finalScore);
         console.log(`Final Score: ${finalScore}`);
-        setSubmitted(true) }
+        setSubmitted(true);
+    };
         
         // useEffect(() => {
         //     if (submitted) {
