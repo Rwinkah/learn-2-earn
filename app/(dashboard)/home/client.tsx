@@ -3,42 +3,13 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CourseData from "@/data/course-info";
 import LessonCard from "@/app/_components/lesson-card";
-import TabLib from "@/app/_components/tablib";
 import TabNote from "@/app/_components/tabnote";
 import eth from "@/assets/images/eth.jpeg";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
 export default function Dashboard() {
-	const [data, setData] = useState(null);
-	const router = useRouter();
-	useEffect(() => {
-		const fetchData = async () => {
-			const accessToken = localStorage.getItem("accessToken");
-			if (!accessToken) {
-				console.error("No access token found in local storage");
-				router.push("/login");
-				return;
-			}
-
-			try {
-				const response = await axios.get("https://api.example.com/data", {
-					headers: {
-						Authorization: `Bearer ${accessToken}`,
-					},
-				});
-				setData(response.data);
-			} catch (error) {
-				console.error("Failed to fetch data:", error);
-				router.push("/login");
-			}
-		};
-
-		fetchData();
-	}, []);
 	return (
 		<div className="flex-col flex-shrink w-full h-[100vh]  text-black">
 			{/* <h1 className="font-bold text-4xl mb-6 text-center text-white">Welcome Learner!</h1> */}

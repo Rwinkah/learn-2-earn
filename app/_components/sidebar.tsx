@@ -1,5 +1,6 @@
 "use client";
 import { GearIcon, HomeIcon, BookmarkIcon } from "@radix-ui/react-icons";
+import Cookies from "js-cookie";
 import mainLogo from "@/assets/images/onboardMeLogo.svg";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -80,7 +81,7 @@ export default function Sidebar() {
 									Home
 								</Button>
 							</Link>
-							<Link href="">
+							<Link href="/create-lesson">
 								<Button
 									onClick={() => handleNavClick("upcoming")}
 									variant={
@@ -90,7 +91,7 @@ export default function Sidebar() {
 									<OnboardMeCalendarIcon
 										pathFill={isPage === "upcoming" ? "#C455FF" : "#8D8990"}
 									/>
-									Upcoming Lessons
+									Create Lessons
 								</Button>
 							</Link>
 							<Link href="">
@@ -148,6 +149,12 @@ export default function Sidebar() {
 							<Link className="bottom-4" href={"/login"}>
 								<Button
 									variant={"ghostSidebar"}
+									onClick={() => {
+										localStorage.removeItem("access_token");
+										localStorage.removeItem("refresh_token");
+										Cookies.remove("access_token");
+										Cookies.remove("refresh_token");
+									}}
 									className=" text-[#CF413C] w-full flex gap-[12px] rounded-xl items-center justify-normal  bg-inherit ">
 									<LogOut width="20" height="20" />
 									Log out

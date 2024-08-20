@@ -1,9 +1,14 @@
 import { StaticImageData } from "next/image";
+import { string } from "zod";
 
 export interface CustomIcon {
 	size?: number;
 	pathFill?: string;
 	spaceFill?: string;
+}
+
+export interface LessonTags {
+	tag: string;
 }
 
 export interface OnboardUser {
