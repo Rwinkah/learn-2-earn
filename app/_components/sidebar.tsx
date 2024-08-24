@@ -17,12 +17,30 @@ import Image from "next/image";
 
 export default function Sidebar() {
 	const pathname = usePathname();
-	const [isPage, setIsPage] = useState<string>();
 	const isTabletAbove = UseMediaQuery("(min-width: 1025px)");
 
-	function handleNavClick(pageID: string) {
-		setIsPage(pageID);
-	}
+	const NavItems = [
+		{
+			title: "home",
+			link: "/home",
+		},
+		{
+			title: "profile",
+			link: "/profile",
+		},
+		{
+			title: "messages",
+			link: "/messages",
+		},
+		{
+			title: "create-lessons",
+			link: "/create-lessons",
+		},
+	];
+
+	const isActive = NavItems.some((item) =>
+		pathname.includes(item.title.toLowerCase())
+	);
 
 	const NavBar = [
 		{
@@ -32,8 +50,8 @@ export default function Sidebar() {
 		},
 		{
 			icon: GearIcon,
-			id: "settings",
-			link: "/settings",
+			id: "profile",
+			link: "/profile",
 		},
 	];
 
@@ -48,7 +66,7 @@ export default function Sidebar() {
 							</div>
 						</Link>
 
-						<Link href={"/settings"}>
+						<Link href={"/profile"}>
 							<div className="flex items-center justify-start p-2 cursor-pointer">
 								<GearIcon width={40} height={40} color="white" />
 							</div>
@@ -72,78 +90,98 @@ export default function Sidebar() {
 						<div className="flex flex-col p-5 gap-6">
 							<Link href={"/home"}>
 								<Button
-									onClick={() => handleNavClick("home")}
-									variant={isPage === "home" ? "activeSidebar" : "ghostSidebar"}
+									// onClick={}
+									variant={
+										pathname.includes("home") ? "activeSidebar" : "ghostSidebar"
+									}
 									className={`w-full justify-normal  items-center flex gap-[12px] flex-wrap rounded-xl   `}>
 									<OnboardMeHomeIcon
-										pathFill={isPage === "home" ? "#C455FF" : "#8D8990"}
+										pathFill={pathname.includes("home") ? "#C455FF" : "#8D8990"}
 									/>
 									Home
 								</Button>
 							</Link>
 							<Link href="/create-lesson">
 								<Button
-									onClick={() => handleNavClick("upcoming")}
+									// onClick={() => handleNavClick("upcoming")}
 									variant={
-										isPage === "upcoming" ? "activeSidebar" : "ghostSidebar"
+										pathname.includes("create-lesson")
+											? "activeSidebar"
+											: "ghostSidebar"
 									}
 									className={`w-full  flex gap-[12px] flex-wrap rounded-xl  items-center justify-normal   `}>
 									<OnboardMeCalendarIcon
-										pathFill={isPage === "upcoming" ? "#C455FF" : "#8D8990"}
+										pathFill={
+											pathname.includes("create-lesson") ? "#C455FF" : "#8D8990"
+										}
 									/>
 									Create Lessons
 								</Button>
 							</Link>
 							<Link href="">
 								<Button
-									onClick={() => handleNavClick("tracks")}
+									// onClick={() => handleNavClick("tracks")}
 									variant={
-										isPage === "tracks" ? "activeSidebar" : "ghostSidebar"
+										pathname.includes("tracks")
+											? "activeSidebar"
+											: "ghostSidebar"
 									}
 									className={`w-full  flex gap-[12px] flex-wrap rounded-xl  items-center justify-normal   `}>
 									<OnboardMeTracksIcon
-										pathFill={isPage === "tracks" ? "#C455FF" : "#8D8990"}
+										pathFill={
+											pathname.includes("tracks") ? "#C455FF" : "#8D8990"
+										}
 									/>
 									Learning Tracks
 								</Button>
 							</Link>
 							<Link href="">
 								<Button
-									onClick={() => handleNavClick("rewards")}
+									// onClick={() => handleNavClick("rewards")}
 									variant={
-										isPage === "rewards" ? "activeSidebar" : "ghostSidebar"
+										pathname.includes("rewards")
+											? "activeSidebar"
+											: "ghostSidebar"
 									}
 									className={`w-full  flex gap-[12px] flex-wrap rounded-xl  items-center justify-normal   `}>
 									<OnboardMeRewardIcon
-										pathFill={isPage === "rewards" ? "#C455FF" : "#8D8990"}
+										pathFill={
+											pathname.includes("rewards") ? "#C455FF" : "#8D8990"
+										}
 									/>
 									Reward System
 								</Button>
 							</Link>
 							<Link href="">
 								<Button
-									onClick={() => handleNavClick("message")}
+									// onClick={() => handleNavClick("message")}
 									variant={
-										isPage === "message" ? "activeSidebar" : "ghostSidebar"
+										pathname.includes("message")
+											? "activeSidebar"
+											: "ghostSidebar"
 									}
 									className={`w-full  flex gap-[12px] flex-wrap rounded-xl  items-center justify-normal   `}>
 									<OnboardMeMessageIcon
-										pathFill={isPage === "message" ? "#C455FF" : "#8D8990"}
+										pathFill={
+											pathname.includes("message") ? "#C455FF" : "#8D8990"
+										}
 									/>
 									Messages
 								</Button>
 							</Link>
 						</div>
 						<div className="flex flex-col gap-4 ">
-							<Link href={"/settings"}>
+							<Link href={"/profile"}>
 								<Button
-									onClick={() => handleNavClick("settings")}
+									// onClick={() => handleNavClick("profile")}
 									variant={
-										isPage === "settings" ? "activeSidebar" : "ghostSidebar"
+										pathname.includes("profile")
+											? "activeSidebar"
+											: "ghostSidebar"
 									}
 									className={`w-full  flex gap-[12px] flex-wrap rounded-xl  items-center justify-normal   `}>
 									<GearIcon />
-									Settings
+									Profile
 								</Button>
 							</Link>
 							<Link className="bottom-4" href={"/login"}>
