@@ -1,7 +1,7 @@
 "use client";
 import { z } from "zod";
 import axios from "axios";
-// import { useState } from "react";
+import { useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
@@ -55,6 +55,7 @@ const lessonSchema = z.object({
 });
 const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 export default function LessonForm() {
+	const [isdisabled, setIsDisabled] = useState<boolean>(false);
 	const { push } = useRouter();
 	const form = useForm<z.infer<typeof lessonSchema>>({
 		resolver: zodResolver(lessonSchema),
@@ -67,55 +68,83 @@ export default function LessonForm() {
 		// 	quiz: [],
 		// },
 	});
+
 	async function handleSubmit(values: z.infer<typeof lessonSchema>) {
-		try {
-			const refreshToken = localStorage.getItem("refresh_token");
+		toast.promise(
+			new Promise(async (resolve, reject) => {
+				try {
+					setIsDisabled(true);
+					const refreshToken = localStorage.getItem("refresh_token");
 
-			if (!refreshToken) {
-				push("/login");
-				throw new Error("No auth tokens found");
-			}
+					if (!refreshToken) {
+						push("/login");
+						throw new Error("No auth tokens found");
+					}
 
-			const newTokenResponse = await axios.post(`${apiUrl}/token-refresh/`, {
-				refresh: refreshToken,
-			});
+					const newTokenResponse = await axios.post(
+						`${apiUrl}/token-refresh/`,
+						{
+							refresh: refreshToken,
+						}
+					);
 
-			let newAccessToken = "";
-			if (newTokenResponse.status === 200) {
-				newAccessToken = newTokenResponse.data.access;
-				localStorage.setItem("access_token", newAccessToken);
-			} else {
-				console.error(
-					"an error has occured, status code ",
-					newTokenResponse.status
-				);
-				push("/login");
-				return;
-			}
-			const createResponse = await axios.post(
-				`${apiUrl}/create-lesson/`,
-				{
-					values,
-				},
-				{
-					headers: {
-						Authorization: `Bearer ${newAccessToken}`,
-					},
+					let newAccessToken = "";
+					if (newTokenResponse.status === 200) {
+						newAccessToken = newTokenResponse.data.access;
+						localStorage.setItem("access_token", newAccessToken);
+					} else {
+						console.error(
+							"an error has occured, status code ",
+							newTokenResponse.status
+						);
+						push("/login");
+						reject("Token refresh failed");
+						return;
+					}
+					const createResponse = await axios.post(
+						`${apiUrl}/create-lesson/`,
+						{
+							values,
+						},
+						{
+							headers: {
+								Authorization: `Bearer ${newAccessToken}`,
+							},
+						}
+					);
+					if (createResponse.status === 201) {
+						toast.success("Lesson created successfully");
+						resolve("Lesson created successfully");
+						// window.location.reload();
+						console.log("sent values", values);
+					} else {
+						reject(
+							`Lesson could not be created because: ${createResponse.data["message"]}`
+						);
+					}
+				} catch (error: any) {
+					console.error("Error creating lesson:", error);
+					reject(
+						error.response.data["message"] || "An unexpected error occurred"
+					);
+				} finally {
+					setTimeout(() => {
+						setIsDisabled(false);
+					}, 3000);
 				}
-			);
-			if (createResponse.status === 201) {
-				toast.success("Lesson created successfully");
-				// window.location.reload();
-				console.log("sent values", values);
-			} else {
-				toast.error("Lesson could not be created, an error has occurred");
+			}),
+			{
+				pending: "Creating lesson...",
+				success: "Lesson created successfully!",
+				error: {
+					render({ data }: any) {
+						return data;
+					},
+				},
 			}
-		} catch (error) {
-			toast.error("An unexpected error occurred");
-			console.error("Error creating lesson:", error);
-		}
+		);
+
 		console.log(values);
-		toast("clicked");
 		console.log("submit clicked");
 	}
 	const { control } = form;
@@ -138,9 +167,9 @@ export default function LessonForm() {
 	});
 
 	return (
-		<>
-			<ToastContainer />
+		<div>
 			<Form {...form}>
+				{/* <ToastContainer containerId={"create-lesson"} /> */}
 				<form
 					onSubmit={form.handleSubmit(handleSubmit)}
 					className="text-white font-medium border-[2px] flex flex-col gap-10 rounded-lg border-[#66666666] shadow-2xl p-8">
@@ -466,11 +495,11 @@ export default function LessonForm() {
 							Add Tag
 						</Button>
 					</div>
-					<Button className="font" type="submit">
+					<Button disabled={isdisabled} className="font" type="submit">
 						Create lesson
 					</Button>
 				</form>
-			</Form>{" "}
-		</>
+			</Form>
+		</div>
 	);
 }

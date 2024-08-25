@@ -21,6 +21,7 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { toast, ToastContainer } from "react-toastify";
 import { OnboardUser } from "../types";
+import { useState } from "react";
 
 const loginSchema = z.object({
 	username: z.string(),
@@ -29,6 +30,7 @@ const loginSchema = z.object({
 const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export function LoginForm() {
+	const [isDisabled, setIsDisabled] = useState<boolean>(false);
 	const auth = useAuth();
 	const user = useUser();
 	const router = useRouter();
@@ -41,36 +43,61 @@ export function LoginForm() {
 	});
 
 	async function onSubmit(values: z.infer<typeof loginSchema>) {
-		try {
-			const response = await axios.post(`${apiUrl}/login-user/`, { values });
+		toast.promise(
+			new Promise(async (resolve, reject) => {
+				try {
+					const response = await axios.post(`${apiUrl}/login-user/`, {
+						values,
+					});
+					setIsDisabled(true);
 
-			// Set authentication tokens
-			localStorage.setItem("access_token", response.data.access);
-			localStorage.setItem("refresh_token", response.data.refresh);
-			Cookies.set("access_token", response.data.access);
-			Cookies.set("refresh_token", response.data.refresh);
+					// Set authentication tokens
+					localStorage.setItem("access_token", response.data.access);
+					localStorage.setItem("refresh_token", response.data.refresh);
+					Cookies.set("access_token", response.data.access);
+					Cookies.set("refresh_token", response.data.refresh);
 
-			// Display success messages
-			toast.success("logged in succesfully");
-			console.log(`${values.username} logged in successfully`);
+					// Display success messages
+					resolve(`Welcome!, ${response.data.username}`);
+					console.log(`${values.username} logged in successfully`);
 
-			// Update authentication state
-			auth.login();
+					// Update authentication state
+					auth.login();
 
-			//update user state
-			const loggedUser: OnboardUser = {
-				username: response.data.username,
-				email: response.data.email,
-				oxp: response.data.oxp,
-			};
-			user.updateUser(loggedUser);
-			setTimeout(() => {
-				router.push("/home"); // Replace with your desired path
-			}, 2000);
-		} catch (error) {
-			toast.error("login attempt failed, try again");
-			console.error("Login attempt failed, an error occurred", error);
-		}
+					//update user state
+					const loggedUser: OnboardUser = {
+						username: response.data.username,
+						email: response.data.email,
+						oxp: response.data.oxp,
+					};
+					user.updateUser(loggedUser);
+					setTimeout(() => {
+						router.push("/home"); // Replace with your desired path
+					}, 3000);
+				} catch (error: any) {
+					reject(`Login attempt failed,	 ${error.response.data.error} `);
+					console.error("Login attempt failed, an error occurred", error);
+				} finally {
+					setTimeout(() => {
+						setIsDisabled(false);
+					});
+				}
+			}),
+			{
+				pending: "Logging in, please wait",
+				success: {
+					render({ data }: any) {
+						return data;
+					},
+				},
+				error: {
+					render({ data }: any) {
+						return data;
+					},
+				},
+			}
+		);
+
 		// console.log(values);
 		// console.log("and then we have");
 		// console.log({ ...values });
