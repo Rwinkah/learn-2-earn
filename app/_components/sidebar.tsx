@@ -38,10 +38,6 @@ export default function Sidebar() {
 		},
 	];
 
-	const isActive = NavItems.some((item) =>
-		pathname.includes(item.title.toLowerCase())
-	);
-
 	const NavBar = [
 		{
 			icon: HomeIcon,
@@ -58,21 +54,7 @@ export default function Sidebar() {
 	return (
 		<>
 			{!isTabletAbove ? (
-				<div className="shadow  h-fit fixed z-500 bottom-0 left-0 right-0 mt-[3rem]">
-					<div className="bg-black w-full flex justify-around items-center h-[6rem]">
-						<Link href={"/home"}>
-							<div className="flex items-center justify-start p-2 cursor-pointer">
-								<HomeIcon width={40} height={40} color="white" />
-							</div>
-						</Link>
-
-						<Link href={"/profile"}>
-							<div className="flex items-center justify-start p-2 cursor-pointer">
-								<GearIcon width={40} height={40} color="white" />
-							</div>
-						</Link>
-					</div>
-				</div>
+				<></>
 			) : (
 				<div className=" text-[#8D8990] text-[18px] min-h-screen h-full bg-[#130C16] min-w-[270px] w-full border-r-[1px] border-r-[#66666666]">
 					<div

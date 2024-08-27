@@ -11,45 +11,16 @@ import eth from "@/public/eth.jpeg";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import { useUser } from "../_context/user-context";
+import { OnboardUser } from "../types";
 export default function ClientLayout({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
-	type userData = {
-		username: string;
-		email: string;
-	};
 	const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+	const user = useUser();
 
-	const [data, setData] = useState<userData | null>(null);
-	const router = useRouter();
-	useEffect(() => {
-		const fetchData = async () => {
-			const accessToken = localStorage.getItem("access_token");
-			if (!accessToken) {
-				console.error("No access token found in local storage");
-				router.push("/login");
-				return;
-			}
-
-			try {
-				const response = await axios.get(`${apiUrl}/user-data/`, {
-					headers: {
-						Authorization: `Bearer ${accessToken}`,
-					},
-				});
-				console.log(response.data);
-				setData(response.data);
-				console.log(data);
-			} catch (error) {
-				console.error("Failed to fetch data:", error);
-				router.push("/login");
-			}
-		};
-
-		fetchData();
-	}, []);
 	return (
 		<main
 			className="lg:grid grid-cols-3 text-[#B2AFB4] gap-0 h-[100vh] bg-[#130C16] max-w-[1440px] overflow-hidden"
@@ -86,10 +57,10 @@ export default function ClientLayout({
 							</div>
 							<div>
 								<p className="text-[#F5F5F5] font-medium text-base">
-									{data ? data.username : "User not logged in"}
+									{user.onboardUser?.username ?? "User not logged in"}
 								</p>
 								<h6 className="text-sm font-light text-[#A3A3A3]">
-									{data ? data.email : "User not logged in"}
+									{user.onboardUser?.email ?? "User not logged in"}
 								</h6>
 							</div>
 						</div>
@@ -101,23 +72,6 @@ export default function ClientLayout({
 								No information available
 							</h2>
 						</div>
-					</div>
-				</div>
-			</RespContainer>
-			<RespContainer hide={false} class_full="hidden" class_sm="mt-20 ">
-				<div className="shadow  h-fit fixed z-500 bottom-0 left-0 right-0 mt-[3rem] border-t-[1px] border-[#66666666]">
-					<div className="bg-black w-full flex justify-around items-center h-[6rem]">
-						<Link href={"/home"}>
-							<div className="flex items-center justify-start p-2 cursor-pointer">
-								<HomeIcon width={20} height={20} color="white" />
-							</div>
-						</Link>
-
-						<Link href={"/settings"}>
-							<div className="flex items-center justify-start p-2 cursor-pointer">
-								<GearIcon width={20} height={20} color="white" />
-							</div>
-						</Link>
 					</div>
 				</div>
 			</RespContainer>

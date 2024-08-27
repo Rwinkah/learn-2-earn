@@ -1,22 +1,25 @@
 "use client";
 
-import { ReactNode, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { useAuth } from "./_context/auth-context"; // Adjust the import path as necessary
+import { ReactNode, useEffect, useState } from "react";
+import { useUser } from "./_context/user-context";
 
 export default function ClientLayout({
 	children,
 }: Readonly<{
 	children: ReactNode;
 }>) {
-	const { isAuthenticated } = useAuth();
-	const router = useRouter();
+	const user = useUser();
+	const [userData, setUserData] = useState(null);
 
 	useEffect(() => {
-		if (!isAuthenticated) {
-			router.push("/login"); // Adjust the login path as necessary
+		const storedUserData = sessionStorage.getItem("user");
+
+		if (storedUserData) {
+			const parsedUserData = JSON.parse(storedUserData);
+			setUserData(parsedUserData);
+			user.updateUser(parsedUserData);
 		}
-	}, [isAuthenticated, router]);
+	}, []); // Empty dependency array ensures this runs only once on mount
 
 	return <>{children}</>;
 }

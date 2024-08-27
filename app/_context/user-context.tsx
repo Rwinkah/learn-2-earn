@@ -5,6 +5,7 @@ import React, {
 	useState,
 	useEffect,
 	ReactNode,
+	useMemo,
 } from "react";
 import axios from "axios";
 import { OnboardUser } from "../types";
@@ -21,26 +22,21 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 
 // Create a provider component
 const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-	const [onboardUser, setOnboardUser] = useState(null);
-
-	// const fetchUser = async () => {
-	// 	try {
-	// 		const response = await axios.get("/api/user/");
-	// 		setOnboardUser(response.data);
-	// 	} catch (error) {
-	// 		console.error("Failed to fetch user:", error);
-	// 	}
-	// };
+	const [onboardUser, setOnboardUser] = useState<OnboardUser | null>(null);
 
 	const updateUser = (user: any) => {
 		setOnboardUser(user);
 	};
+	const value = useMemo(() => ({ onboardUser, updateUser }), [onboardUser]);
 
-	return (
-		<UserContext.Provider value={{ onboardUser, updateUser }}>
-			{children}
-		</UserContext.Provider>
-	);
+	useEffect(() => {
+		const user = localStorage.getItem("user"); // Or use cookies
+		if (user) {
+			updateUser(user);
+		}
+	}, []);
+
+	return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
 
 // Custom hook to use the UserContext

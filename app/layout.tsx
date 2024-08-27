@@ -41,7 +41,9 @@ export default function RootLayout({
 	return (
 		<html lang="en" className="max-w-[100vw] max-h-[100vh] overflow-hidden">
 			<body className="max-w-[100vw] bg-[#130C16] flex flex-col items-center">
-				<Providers>{children}</Providers>
+				<Providers>
+					<ClientLayout>{children}</ClientLayout>
+				</Providers>
 			</body>
 		</html>
 	);

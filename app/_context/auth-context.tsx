@@ -6,13 +6,8 @@ import React, {
 	ReactNode,
 	useEffect,
 } from "react";
-
+import { AuthContextType } from "../types";
 // Define the shape of the context state
-interface AuthContextType {
-	isAuthenticated: boolean;
-	login: () => void;
-	logout: () => void;
-}
 
 // Create the context with a default value
 export const AuthContext = createContext<AuthContextType | undefined>(
@@ -29,6 +24,8 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
 	const logout = () => {
 		setIsAuthenticated(false);
+		localStorage.removeItem("user");
+		sessionStorage.removeItem("user");
 	};
 
 	useEffect(() => {

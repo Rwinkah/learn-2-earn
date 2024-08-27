@@ -122,7 +122,25 @@
 
 /*>>>>>>>>>>>>>>>>>>>>>>>>>*/
 
+/* custom scrollbar for tabslist*/
+.tabs-scrollbar::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
 
+.tabs-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.tabs-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+.tabs-scrollbar::-webkit-scrollbar-track {
+  background-color: #000;
+  border-radius: 10px;
+}
 @layer base {
   * {
     @apply border-border;

@@ -1,6 +1,9 @@
 import { StaticImageData } from "next/image";
-import { string } from "zod";
-
+export interface AuthContextType {
+	isAuthenticated: boolean;
+	login: () => void;
+	logout: () => void;
+}
 export interface CustomIcon {
 	size?: number;
 	pathFill?: string;
@@ -15,6 +18,7 @@ export interface OnboardUser {
 	username: string;
 	email: string;
 	oxp: number;
+	completed_quiz: string[];
 }
 export type difficulty =
 	| "Normie"
@@ -39,7 +43,7 @@ export interface Lesson {
 	id: string;
 	title: string;
 	creator: string;
-	level: difficulty;
+	difficulty: difficulty;
 	quiz: Questions[];
 	article: {
 		intro: ArticleSubObject;
@@ -47,6 +51,9 @@ export interface Lesson {
 		summary: ArticleSubObject;
 	};
 	description: string;
-	img: StaticImageData;
+	// img: StaticImageData;
 	tags: string[];
+	upvote?: number;
+	downvote?: number;
+	oxp_amount?: number;
 }

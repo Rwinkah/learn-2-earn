@@ -16,7 +16,7 @@ export default function AuthLayout({
 					className="container w-full pt-5 lg:w-1/2 flex flex-col justify-center items-center max-w-[500px]">
 					<div
 						id="logo"
-						className="flex mt-[21px] w-full mb-20  items-center justify-center">
+						className="flex mt-[21px] w-full mb-10  items-center justify-center">
 						<h6 className="font-medium text-3xl">
 							{/* Welcome to <span className="text-primary">OnboardMe</span> */}
 						</h6>

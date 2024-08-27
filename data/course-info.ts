@@ -6,7 +6,7 @@ const lessons: Lesson[] = [
 		id: "001",
 		title: "Intro to WEB3",
 		creator: "Wino",
-		level: "Normie",
+		difficulty: "Normie",
 		description: "A beginner-friendly introduction to the world of Web3.",
 		quiz: [
 			{
@@ -92,7 +92,7 @@ const lessons: Lesson[] = [
 		id: "002",
 		title: "Blockchain Basics",
 		creator: "CryptoGuru",
-		level: "Normie",
+		difficulty: "Normie",
 		description: "Learn the foundational concepts of blockchain technology.",
 		quiz: [
 			{
@@ -177,7 +177,7 @@ const lessons: Lesson[] = [
 		id: "003",
 		title: "Ethereum and Smart Contracts",
 		creator: "BlockMaster",
-		level: "Intermediate",
+		difficulty: "Intermediate",
 		description: "Dive into Ethereum and the creation of smart contracts.",
 		quiz: [
 			{
@@ -262,7 +262,7 @@ const lessons: Lesson[] = [
 		id: "004",
 		title: "Decentralized Finance (DeFi)",
 		creator: "FinanceWizard",
-		level: "Expert",
+		difficulty: "Expert",
 		description: "Explore the revolutionary world of DeFi and its impact.",
 		quiz: [
 			{
@@ -348,7 +348,7 @@ const lessons: Lesson[] = [
 		id: "005",
 		title: "NFTs for Artists",
 		creator: "ArtInnovator",
-		level: "Normie",
+		difficulty: "Normie",
 		description: "Understanding NFTs and their significance for artists.",
 		quiz: [
 			{
@@ -434,13 +434,13 @@ const lessons: Lesson[] = [
 		id: "006",
 		title: "Solidity Programming",
 		creator: "CodeSmith",
-		level: "Idolo",
+		difficulty: "Idolo",
 		description: "Master the Solidity language for smart contract development.",
 		quiz: [
 			{
 				ques: "What is Solidity?",
-				ans: "High-level language for smart contracts on Ethereum",
-				alt1: "Low-level language for operating systems",
+				ans: "High-difficulty language for smart contracts on Ethereum",
+				alt1: "Low-difficulty language for operating systems",
 				alt2: "General-purpose language for web development",
 			},
 			{
@@ -503,7 +503,7 @@ const lessons: Lesson[] = [
 		article: {
 			intro: {
 				subtitle: "Introduction to Solidity Programming",
-				text: "Solidity is a high-level programming language used for writing smart contracts on blockchain platforms, primarily Ethereum. It was designed with the specific goal of enabling the creation of smart contracts that can automate and enforce agreements in a secure and decentralized manner. Solidity is statically typed and supports inheritance, libraries, and complex user-defined types, making it suitable for a wide range of decentralized applications (dApps). Smart contracts written in Solidity are executed on the Ethereum Virtual Machine (EVM), ensuring that they run exactly as programmed without any downtime, fraud, or interference.",
+				text: "Solidity is a high-difficulty programming language used for writing smart contracts on blockchain platforms, primarily Ethereum. It was designed with the specific goal of enabling the creation of smart contracts that can automate and enforce agreements in a secure and decentralized manner. Solidity is statically typed and supports inheritance, libraries, and complex user-defined types, making it suitable for a wide range of decentralized applications (dApps). Smart contracts written in Solidity are executed on the Ethereum Virtual Machine (EVM), ensuring that they run exactly as programmed without any downtime, fraud, or interference.",
 			},
 			body: {
 				subtitle: "Key Features and Syntax",
@@ -519,7 +519,7 @@ const lessons: Lesson[] = [
 		id: "007",
 		title: "DApp Development",
 		creator: "DAppDev",
-		level: "Idolo",
+		difficulty: "Idolo",
 		description: "Learn to develop decentralized applications (DApps).",
 		quiz: [
 			{
@@ -604,7 +604,7 @@ const lessons: Lesson[] = [
 		id: "008",
 		title: "Crypto Wallets and Security",
 		creator: "SecureChain",
-		level: "Amateur",
+		difficulty: "Amateur",
 		description: "Essentials of crypto wallets and security practices.",
 		quiz: [
 			{
@@ -689,7 +689,7 @@ const lessons: Lesson[] = [
 		id: "009",
 		title: "Web3.js Library",
 		creator: "Web3Fan",
-		level: "Intermediate",
+		difficulty: "Intermediate",
 		description: "Interact with Ethereum blockchain using Web3.js.",
 		quiz: [
 			{

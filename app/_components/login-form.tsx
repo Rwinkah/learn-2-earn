@@ -69,17 +69,27 @@ export function LoginForm() {
 						username: response.data.username,
 						email: response.data.email,
 						oxp: response.data.oxp,
+						completed_quiz: response.data.completed_quiz,
 					};
+
 					user.updateUser(loggedUser);
+					sessionStorage.setItem("user", JSON.stringify(loggedUser));
+
 					setTimeout(() => {
 						router.push("/home"); // Replace with your desired path
 					}, 3000);
 				} catch (error: any) {
-					reject(`Login attempt failed,	 ${error.response.data.error} `);
+					reject(`Login attempt failed,	 ${error.response.data.error ?? ""} `);
 					console.error("Login attempt failed, an error occurred", error);
 				} finally {
 					setTimeout(() => {
 						setIsDisabled(false);
+						console.log(
+							"onboard user is ",
+							user.onboardUser?.username,
+							" and ",
+							user.onboardUser?.email
+						);
 					});
 				}
 			}),

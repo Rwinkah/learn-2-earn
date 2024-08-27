@@ -20,11 +20,10 @@ interface lessonCardProps {
 	id: string;
 	title: string;
 	creator: string;
-	level: difficulty;
+	difficulty: difficulty;
 	quiz: Questions[];
 
 	description: string;
-	img: StaticImageData;
 	tags: string[];
 }
 
@@ -32,27 +31,28 @@ export default function LessonCard({
 	title,
 	id,
 	creator,
-	level,
+	difficulty,
 	quiz,
 	description,
-	img,
 	tags,
 }: lessonCardProps) {
 	return (
-		<Card className="w-4/5 flex flex-col border-[1px] border-gray-500  pt-4 h-fit lg:max-h-fit p-8  bg-[#070707] text-white">
+		<Card className="w-[90%] flex flex-col border-[1px] border-gray-500  pt-4 h-fit lg:max-h-fit p-8  bg-[#070707] text-white">
 			<Link className="" href={`/lessons/${id}`}>
+				<h2 className={`font-light  text-sm mb-2 pb-3`}>
+					Author: <span className={`${difficulty} font-medium`}>{creator}</span>
+				</h2>
 				<div id="header" className="flex flex-col gap-1">
-					<h2 className="font-medium text-sm">
-						{creator} | <span className={`${level}`}>{level}</span>
-					</h2>
-					<h1 className=" text-4xl p-0 font-bold ">{title}</h1>
+					<h1 className=" text-2xl lg:text-4xl p-0 font-bold ">{title}</h1>
 				</div>
 				<h2 className="mb-10">{description}</h2>
 				{/* <img src={img} /> */}
-				<ImageWithSkeleton src={img} alt="alt" clas="lop" />
+				{/* <ImageWithSkeleton src={img} alt="alt" clas="lop" /> */}
 				<div className="lg:flex gap-2 mt-8">
-					<h3 className="text-white">Tags:</h3>
-					<div id="tags" className="w-full flex gap-2 flex-wrap">
+					<h3 className="text-white text-sm lg:text-base">Tags:</h3>
+					<div
+						id="tags"
+						className="w-full flex gap-2 flex-wrap text-xs lg:text-sm">
 						{tags.map((tag) => (
 							<h4 key={tag} className="text-primaryLight font-semibold">
 								{tag}

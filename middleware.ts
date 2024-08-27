@@ -21,5 +21,6 @@ export const config = {
 		"/create-lesson",
 		"/lessons/:path*",
 		"/settings",
+		"/profile",
 	],
 };
