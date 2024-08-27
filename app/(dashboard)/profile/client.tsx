@@ -6,9 +6,9 @@ import { Metadata } from "next";
 import { useUser } from "@/app/_context/user-context";
 
 export const metadata: Metadata = {
-	title: "Settings",
-	openGraph: { title: "Settings" },
-	twitter: { title: "Settings" },
+	title: "profile",
+	openGraph: { title: "profile" },
+	twitter: { title: "profile" },
 };
 
 export default function ProfileClient() {

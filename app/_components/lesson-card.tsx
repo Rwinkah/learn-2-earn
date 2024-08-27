@@ -16,6 +16,10 @@ import Image, { StaticImageData } from "next/image";
 
 import type { Questions } from "@/app/types";
 
+interface tags {
+	tag: string;
+}
+
 interface lessonCardProps {
 	id: string;
 	title: string;
@@ -24,7 +28,7 @@ interface lessonCardProps {
 	quiz: Questions[];
 
 	description: string;
-	tags: string[];
+	tags: tags[];
 }
 
 export default function LessonCard({
@@ -39,9 +43,13 @@ export default function LessonCard({
 	return (
 		<Card className="w-[90%] flex flex-col border-[1px] border-gray-500  pt-4 h-fit lg:max-h-fit p-8  bg-[#070707] text-white">
 			<Link className="" href={`/lessons/${id}`}>
-				<h2 className={`font-light  text-sm mb-2 pb-3`}>
-					Author: <span className={`${difficulty} font-medium`}>{creator}</span>
-				</h2>
+				<div
+					className={`font-light  text-sm mb-2 pb-3 flex items-center  w-full ml-auto ${difficulty}`}>
+					<div className="ml-auto">
+						author:{" "}
+						<span className={`${difficulty} font-medium`}>{creator}</span>
+					</div>
+				</div>
 				<div id="header" className="flex flex-col gap-1">
 					<h1 className=" text-2xl lg:text-4xl p-0 font-bold ">{title}</h1>
 				</div>
@@ -53,9 +61,9 @@ export default function LessonCard({
 					<div
 						id="tags"
 						className="w-full flex gap-2 flex-wrap text-xs lg:text-sm">
-						{tags.map((tag) => (
-							<h4 key={tag} className="text-primaryLight font-semibold">
-								{tag}
+						{tags.map((tag, index) => (
+							<h4 key={index} className="text-primaryLight font-semibold">
+								{tag.tag}
 							</h4>
 						))}
 					</div>

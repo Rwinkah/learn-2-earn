@@ -21,11 +21,11 @@ export interface OnboardUser {
 	completed_quiz: string[];
 }
 export type difficulty =
-	| "Normie"
-	| "Amateur"
-	| "Intermediate"
-	| "Expert"
-	| "Idolo";
+	| "normie"
+	| "amateur"
+	| "intermediate"
+	| "expert"
+	| "idolo";
 
 export interface ArticleSubObject {
 	subtitle: string;
@@ -42,7 +42,7 @@ export interface Questions {
 export interface Lesson {
 	id: string;
 	title: string;
-	creator: string;
+	author_username: string;
 	difficulty: difficulty;
 	quiz: Questions[];
 	article: {
@@ -50,9 +50,9 @@ export interface Lesson {
 		body: ArticleSubObject;
 		summary: ArticleSubObject;
 	};
-	description: string;
+	lesson_description: string;
 	// img: StaticImageData;
-	tags: string[];
+	tags: LessonTags[];
 	upvote?: number;
 	downvote?: number;
 	oxp_amount?: number;

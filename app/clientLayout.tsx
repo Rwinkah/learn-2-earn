@@ -2,6 +2,7 @@
 
 import { ReactNode, useEffect, useState } from "react";
 import { useUser } from "./_context/user-context";
+import { useLesson } from "./_context/lesson-context";
 
 export default function ClientLayout({
 	children,
@@ -9,15 +10,20 @@ export default function ClientLayout({
 	children: ReactNode;
 }>) {
 	const user = useUser();
-	const [userData, setUserData] = useState(null);
+	const lesson = useLesson();
 
 	useEffect(() => {
 		const storedUserData = sessionStorage.getItem("user");
+		const storedLesson = sessionStorage.getItem("lessons");
 
 		if (storedUserData) {
 			const parsedUserData = JSON.parse(storedUserData);
-			setUserData(parsedUserData);
 			user.updateUser(parsedUserData);
+		}
+
+		if (storedLesson) {
+			const parsedLessonData = JSON.parse(storedLesson);
+			lesson.updateLesson(parsedLessonData);
 		}
 	}, []); // Empty dependency array ensures this runs only once on mount
 

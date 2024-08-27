@@ -5,10 +5,11 @@ import React, {
 	useState,
 	ReactNode,
 	useEffect,
+	useMemo,
 } from "react";
 import { Lesson } from "../types";
 interface LessonContextType {
-	allLessons: Lesson[] | null;
+	allLessons: Lesson[];
 	updateLesson: (lesson: Lesson) => void;
 }
 export const LessonsContext = createContext<LessonContextType | undefined>(
@@ -16,16 +17,23 @@ export const LessonsContext = createContext<LessonContextType | undefined>(
 );
 
 const LessonsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-	const [allLessons, setLessons] = useState(null);
+	const [allLessons, setLessons] = useState([]);
 
 	const updateLesson = (lessonsData: any) => {
 		setLessons(lessonsData);
 	};
 
+	const value = useMemo(() => ({ allLessons, updateLesson }), [allLessons]);
+
+	useEffect(() => {
+		const lesson = localStorage.getItem("lessons"); // Or use cookies
+		if (lesson) {
+			updateLesson(lesson);
+		}
+	}, []);
+
 	return (
-		<LessonsContext.Provider value={{ updateLesson, allLessons }}>
-			{children}
-		</LessonsContext.Provider>
+		<LessonsContext.Provider value={value}>{children}</LessonsContext.Provider>
 	);
 };
 

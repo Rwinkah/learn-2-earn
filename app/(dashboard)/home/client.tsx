@@ -1,10 +1,9 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import CourseData from "@/data/course-info";
+import lessonData from "@/data/course-info";
 import LessonCard from "@/app/_components/lesson-card";
-import TabNote from "@/app/_components/tabnote";
-import eth from "@/assets/images/eth.jpeg";
+
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios, { AxiosResponse } from "axios";
@@ -13,53 +12,68 @@ import { useLesson } from "@/app/_context/lesson-context";
 import { Lesson } from "@/app/types";
 
 export default function Dashboard() {
-	const [allLessons, setAllLessons] = useState<Lesson[]>([]);
+	const [lessonData, setLessonData] = useState<Lesson[]>([]);
 	const { push } = useRouter();
-	const lessons = useLesson();
+	const { updateLesson, allLessons } = useLesson();
 	const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+	const updateLessonData = (data: any) => {
+		setLessonData(data);
+		sessionStorage.setItem("lessons", JSON.stringify(data));
+		updateLesson(data);
+		console.log(data);
+		console.log(allLessons);
+	};
+
 	useEffect(() => {
 		const fetchLessonData = async () => {
-			const refreshToken = localStorage.getItem("refresh_token");
+			try {
+				const refreshToken = localStorage.getItem("refresh_token");
 
-			if (!refreshToken) {
-				push("/login");
-				throw new Error("No auth tokens found");
-			}
+				if (!refreshToken) {
+					push("/login");
+					throw new Error("No auth tokens found");
+				}
 
-			const newTokenResponse = await axios.post(`${apiUrl}/token-refresh/`, {
-				refresh: refreshToken,
-			});
+				const newTokenResponse = await axios.post(`${apiUrl}/token-refresh/`, {
+					refresh: refreshToken,
+				});
 
-			let newAccessToken = "";
-			if (newTokenResponse.status === 200) {
-				newAccessToken = newTokenResponse.data.access;
-				localStorage.setItem("access_token", newAccessToken);
-			} else {
-				console.error(
-					"an error has occured, status code ",
-					newTokenResponse.status
-				);
-				push("/login");
-				console.error("Token refresh failed");
-				return;
-			}
-			axios
-				.get(`${apiUrl}/lesson-data`, {
+				let newAccessToken = "";
+				if (newTokenResponse.status === 200) {
+					newAccessToken = newTokenResponse.data.access;
+					localStorage.setItem("access_token", newAccessToken);
+				} else {
+					console.error(
+						"An error has occurred, status code ",
+						newTokenResponse.status
+					);
+					push("/login");
+					console.error("Token refresh failed");
+					return;
+				}
+
+				const lessonResponse = await axios.get(`${apiUrl}/lesson-data`, {
 					headers: {
 						Authorization: `Bearer ${newAccessToken}`,
 					},
-				})
-				.then((response: AxiosResponse) => {
-					// console.log(response.data);
-					setAllLessons(response.data);
-				})
-				.catch((error) => {
-					console.error("Error fetching lesson data:", error);
-					// Optionally, you can set an error state here to display an error message to the user
-				})
-				.finally(() => {
-					console.log("lesosns fetched");
 				});
+
+				// setLessonData(lessonResponse.data);
+				// sessionStorage.setItem("lessons", JSON.stringify(lessonResponse.data));
+				// updateLesson(lessonResponse.data);
+				// console.log(lessonResponse.data);
+				// console.log(allLessons);
+
+				updateLessonData(lessonResponse.data);
+			} catch (error) {
+				console.error("Error fetching lesson data:", error);
+				// Optionally, you can set an error state here to display an error message to the user
+			} finally {
+				console.log("Lessons fetched");
+				console.log("All lessons", allLessons);
+				console.log("Type of lessonData:", lessonData);
+			}
 		};
 
 		fetchLessonData();
@@ -101,20 +115,25 @@ export default function Dashboard() {
 						</p>
 					</div>
 					<div className=" flex flex-col gap-10 pt-10 pl-4 pr-4 items-center mb-[10rem]">
-						{CourseData.filter((item) => item.difficulty === "Normie").map(
-							(item) => (
-								<LessonCard
-									key={item.id}
-									id={item.id}
-									title={item.title}
-									creator={item.creator}
-									difficulty={item.difficulty}
-									tags={item.tags}
-									quiz={item.quiz}
-									description={item.description}
-									// docs={generateRandomNumberAsString()}
-								/>
-							)
+						{lessonData.length > 0 ? (
+							lessonData
+								.filter((item: Lesson) => item.difficulty === "normie")
+								.map((item: Lesson) => (
+									<LessonCard
+										key={item.id}
+										id={item.id}
+										title={item.title}
+										creator={item.author_username}
+										difficulty={item.difficulty}
+										tags={item.tags}
+										quiz={item.quiz}
+										description={item.lesson_description}
+										// docs={generateRandomNumberAsString()}
+									/>
+								))
+						) : (
+							// <p className="text-white text-4xl">{lessonData.length}</p>
+							<div className="text-white text-4xl">unavailnle</div>
 						)}
 					</div>
 				</TabsContent>
@@ -126,26 +145,31 @@ export default function Dashboard() {
 							Your Journey into web3 Begins Here!
 						</h1>
 						<p className="text-[#B2AFB4] ">
-							You're just getting started, and that's great! We've curated some
-							beginner-friendly lessons to help you understand the basics of
-							web3 and blockchain technology.
+							You&apos;re just getting started, and that&apos;s great!
+							We&apos;ve curated some beginner-friendly lessons to help you
+							understand the basics of web3 and blockchain technology.
 						</p>
 					</div>
 					<div className=" flex flex-col gap-10 pt-10 pl-4 pr-4 items-center mb-[10rem]">
-						{CourseData.filter((item) => item.difficulty === "Amateur").map(
-							(item) => (
-								<LessonCard
-									key={item.id}
-									id={item.id}
-									title={item.title}
-									creator={item.creator}
-									difficulty={item.difficulty}
-									tags={item.tags}
-									quiz={item.quiz}
-									description={item.description}
-									// docs={generateRandomNumberAsString()}
-								/>
-							)
+						{lessonData.length > 0 ? (
+							lessonData
+								.filter((item: Lesson) => item.difficulty === "amateur")
+								.map((item: Lesson) => (
+									<LessonCard
+										key={item.id}
+										id={item.id}
+										title={item.title}
+										creator={item.author_username}
+										difficulty={item.difficulty}
+										tags={item.tags}
+										quiz={item.quiz}
+										description={item.lesson_description}
+										// docs={generateRandomNumberAsString()}
+									/>
+								))
+						) : (
+							// <p className="text-white text-4xl">{lessonData.length}</p>
+							<div className="text-white text-4xl">unavailnle</div>
 						)}
 					</div>
 				</TabsContent>
@@ -157,27 +181,32 @@ export default function Dashboard() {
 							Elevate Your web3 Skills!
 						</h1>
 						<p className="text-[#B2AFB4] ">
-							You've got the basics down! Now it's time to dive deeper with
-							lessons that will expand your understanding and skills in the web3
-							space.
+							You&apos;ve got the basics down! Now it&apos;s time to dive deeper
+							with lessons that will expand your understanding and skills in the
+							web3 space.
 						</p>
 					</div>
 					<div className=" flex flex-col gap-10 pt-10 pl-4 pr-4 items-center mb-[10rem]">
-						{CourseData.filter(
-							(item) => item.difficulty === "Intermediate"
-						).map((item) => (
-							<LessonCard
-								key={item.id}
-								id={item.id}
-								title={item.title}
-								creator={item.creator}
-								difficulty={item.difficulty}
-								tags={item.tags}
-								quiz={item.quiz}
-								description={item.description}
-								// docs={generateRandomNumberAsString()}
-							/>
-						))}
+						{lessonData.length > 0 ? (
+							lessonData
+								.filter((item: Lesson) => item.difficulty === "intermediate")
+								.map((item: Lesson) => (
+									<LessonCard
+										key={item.id}
+										id={item.id}
+										title={item.title}
+										creator={item.author_username}
+										difficulty={item.difficulty}
+										tags={item.tags}
+										quiz={item.quiz}
+										description={item.lesson_description}
+										// docs={generateRandomNumberAsString()}
+									/>
+								))
+						) : (
+							// <p className="text-white text-4xl">{lessonData.length}</p>
+							<div className="text-white text-4xl">unavailnle</div>
+						)}
 					</div>
 				</TabsContent>
 				<TabsContent
@@ -188,26 +217,31 @@ export default function Dashboard() {
 							Conquer the Challenges of web3!
 						</h1>
 						<p className="text-[#B2AFB4] ">
-							You're already well-versed in web3. Our advanced lessons will
+							You&apos;re already well-versed in web3. Our advanced lessons will
 							challenge you and help you master the complexities of this
 							cutting-edge technology.
 						</p>
 					</div>
 					<div className=" flex flex-col gap-10 pt-10 pl-4 pr-4 items-center mb-[10rem]">
-						{CourseData.filter((item) => item.difficulty === "Expert").map(
-							(item) => (
-								<LessonCard
-									key={item.id}
-									id={item.id}
-									title={item.title}
-									creator={item.creator}
-									difficulty={item.difficulty}
-									tags={item.tags}
-									quiz={item.quiz}
-									description={item.description}
-									// docs={generateRandomNumberAsString()}
-								/>
-							)
+						{lessonData.length > 0 ? (
+							lessonData
+								.filter((item: Lesson) => item.difficulty === "expert")
+								.map((item: Lesson) => (
+									<LessonCard
+										key={item.id}
+										id={item.id}
+										title={item.title}
+										creator={item.author_username}
+										difficulty={item.difficulty}
+										tags={item.tags}
+										quiz={item.quiz}
+										description={item.lesson_description}
+										// docs={generateRandomNumberAsString()}
+									/>
+								))
+						) : (
+							// <p className="text-white text-4xl">{lessonData.length}</p>
+							<div className="text-white text-4xl">unavailnle</div>
 						)}
 					</div>
 				</TabsContent>
@@ -219,26 +253,31 @@ export default function Dashboard() {
 							Become a web3 Visionary!
 						</h1>
 						<p className="text-[#B2AFB4] ">
-							You're at the pinnacle of web3 knowledge! These lessons are
+							You&apos;re at the pinnacle of web3 knowledge! These lessons are
 							designed for true pioneers who are shaping the future of this
 							space.
 						</p>
 					</div>
 					<div className=" flex flex-col gap-10 pt-10 pl-4 pr-4 items-center mb-[10rem]">
-						{CourseData.filter((item) => item.difficulty === "Idolo").map(
-							(item) => (
-								<LessonCard
-									key={item.id}
-									id={item.id}
-									title={item.title}
-									creator={item.creator}
-									difficulty={item.difficulty}
-									tags={item.tags}
-									quiz={item.quiz}
-									description={item.description}
-									// docs={generateRandomNumberAsString()}
-								/>
-							)
+						{lessonData.length > 0 ? (
+							lessonData
+								.filter((item: Lesson) => item.difficulty === "idolo")
+								.map((item: Lesson) => (
+									<LessonCard
+										key={item.id}
+										id={item.id}
+										title={item.title}
+										creator={item.author_username}
+										difficulty={item.difficulty}
+										tags={item.tags}
+										quiz={item.quiz}
+										description={item.lesson_description}
+										// docs={generateRandomNumberAsString()}
+									/>
+								))
+						) : (
+							// <p className="text-white text-4xl">{lessonData.length}</p>
+							<div className="text-white text-4xl">unavailnle</div>
 						)}
 					</div>
 				</TabsContent>
