@@ -15,7 +15,7 @@ export default function Header() {
 			class_sm="flex justify-between mb-10 lg:mb-20 items-center pl-4 w-full">
 			<div
 				id="searchBox"
-				className="lg:p-3 p-[2px] pl- w-2/3  rounded-3xl  lg:w-[507px] bg-[#130c16] flex items-center lg:gap-4">
+				className="lg:p-3 p-[2px] pl- w-2/3 max-h-11  rounded-3xl  lg:w-[507px] bg-[#130c16] flex items-center lg:gap-4">
 				<Search
 					color="#666666"
 					className="w-[22] lg:w-6 pl-2 lg:pl-0 lg:h-6 h-[22]"
