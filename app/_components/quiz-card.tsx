@@ -10,8 +10,8 @@ interface QuizCardProps extends Questions {
 	questionIndex: number;
 }
 export default function QuizCard({
-	ques,
-	ans,
+	question,
+	answer,
 	alt1,
 	alt2,
 	updateAnswer,
@@ -31,14 +31,14 @@ export default function QuizCard({
 		}
 
 		// Prepare the options array and shuffle it
-		const options = [ans, alt1, alt2];
+		const options = [answer, alt1, alt2];
 		setShuffledOptions(shuffleArray([...options]));
-	}, [ans, alt1, alt2]);
+	}, [answer, alt1, alt2]);
 
 	// Function to handle answer selection
 	const handleSelectAnswer = (selectedOption: string) => {
 		setSelectedOption(selectedOption); // Step 3
-		const isCorrect = selectedOption === ans ? 1 : 0;
+		const isCorrect = selectedOption === answer ? 1 : 0;
 		updateAnswer(questionIndex, isCorrect);
 	};
 
@@ -47,7 +47,7 @@ export default function QuizCard({
 			id="quiz-card"
 			className=" hover:shadow-2xl hover:scale-90 transition-all duration-150 ease-in-out bg-black text-white  min-h-[70vh] h-auto  border-2 rounded-lg w-[90vw] lg:w-[70vw] lg:h-[500px] p-20 flex flex-col gap-10">
 			<h1 className="text-primary font-bold text-xl md:text-3xl mb-5">
-				{ques}
+				{question}
 			</h1>
 			{shuffledOptions.map((option, index) => (
 				<Button

@@ -41,7 +41,7 @@ export default function LessonCard({
 	tags,
 }: lessonCardProps) {
 	return (
-		<Card className="w-[90%] flex flex-col border-[1px] border-gray-500  pt-4 h-fit lg:max-h-fit p-8  bg-[#070707] text-white">
+		<Card className="w-[90%] flex flex-col border-[1px] border-gray-500  pt-4 h-fit lg:max-h-fit lg:p-8 p-4  bg-[#070707] text-white">
 			<Link className="" href={`/lessons/${id}`}>
 				<div
 					className={`font-light  text-sm mb-2 pb-3 flex items-center  w-full ml-auto ${difficulty}`}>
@@ -51,13 +51,13 @@ export default function LessonCard({
 					</div>
 				</div>
 				<div id="header" className="flex flex-col gap-1">
-					<h1 className=" text-2xl lg:text-4xl p-0 font-bold ">{title}</h1>
+					<h1 className=" text-xl lg:text-4xl p-0 font-bold ">{title}</h1>
 				</div>
-				<h2 className="mb-10">{description}</h2>
+				<h2 className=" text-sm lg:mb-10">{description}</h2>
 				{/* <img src={img} /> */}
 				{/* <ImageWithSkeleton src={img} alt="alt" clas="lop" /> */}
-				<div className="lg:flex gap-2 mt-8">
-					<h3 className="text-white text-sm lg:text-base">Tags:</h3>
+				<div className="lg:flex gap-2 mt-4 lg:mt-8">
+					<h3 className="text-white text-xs lg:text-base">Tags:</h3>
 					<div
 						id="tags"
 						className="w-full flex gap-2 flex-wrap text-xs lg:text-sm">

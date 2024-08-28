@@ -8,35 +8,30 @@ export default function AuthLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<main id="Auth-Page" className="w-full text-white bg-black  h-[100vh]">
+		<div
+			id="Auth-Page"
+			className="w-full overflow-y-scroll text-white bg-black h-full">
 			<ToastContainer containerId={"authentication"} />
-			<div className="flex items-center h-full">
+			<div className="flex h-full items-center">
 				<div
 					id="signPage__left"
-					className="container w-full pt-5 lg:w-1/2 flex flex-col justify-center items-center max-w-[500px]">
-					<div
-						id="logo"
-						className="flex mt-[21px] w-full mb-10  items-center justify-center">
-						<h6 className="font-medium text-3xl">
-							{/* Welcome to <span className="text-primary">OnboardMe</span> */}
-						</h6>
-					</div>
+					className="container w-full lg:w-1/2 flex flex-col xl:justify-center h-full pt-[10vh]  max-w-[500px]  overflw-y-scroll">
 					<div id="signPage__left__form" className="w-full">
 						{children}
 					</div>
 				</div>
 				<div
 					id="signPage__right"
-					className=" items-center flex justify-center lg:flex lg:w-1/2 h-full p-[1rem]">
+					className="hidden 2xl:flex items-center  justify-center lg:flex lg:w-1/2 h-full p-[1rem]">
 					<Image
 						src={sign}
-						className="h-2/3 w-2/3"
+						className="h-2/3 w-2/3 "
 						width={600}
 						height={450}
 						alt="sign-image"
 					/>
 				</div>
 			</div>
-		</main>
+		</div>
 	);
 }

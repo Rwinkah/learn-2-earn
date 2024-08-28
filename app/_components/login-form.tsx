@@ -150,7 +150,7 @@ export function LoginForm() {
 							</FormControl>
 							<a
 								className=" self-end text-primary font-medium text-sm"
-								href="/forgot">
+								href="/login">
 								Forgot password?
 							</a>
 							<h3 className="text-center pt-[40px]">

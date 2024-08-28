@@ -1,7 +1,7 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import lessonData from "@/data/course-info";
+// import lessonData from "@/data/course-info";
 import LessonCard from "@/app/_components/lesson-card";
 
 import { useEffect, useState } from "react";
@@ -106,7 +106,7 @@ export default function Dashboard() {
 				</TabsList>
 				<TabsContent
 					value="Normie"
-					className="overflow-scroll h-[80vh]  pr-0   ">
+					className="overflow-y-scroll h-[80vh]  pr-0   ">
 					<div className="flex flex-col gap-3 text-[#F4E7FFE5] p-10 lg:border-[#FFFFFF33] border-b-[1px]">
 						<h1 className="font-semibold text-3xl ">Welcome to web3!</h1>
 						<p className="text-[#B2AFB4] ">
@@ -114,7 +114,7 @@ export default function Dashboard() {
 							lessons to onboard you into this very exciting space{" "}
 						</p>
 					</div>
-					<div className=" flex flex-col gap-10 pt-10 pl-4 pr-4 items-center mb-[10rem]">
+					<div className=" flex flex-col gap-10 pt-10 mb-20 pl-4 pr-4 items-center ">
 						{lessonData.length > 0 ? (
 							lessonData
 								.filter((item: Lesson) => item.difficulty === "normie")
@@ -133,7 +133,7 @@ export default function Dashboard() {
 								))
 						) : (
 							// <p className="text-white text-4xl">{lessonData.length}</p>
-							<div className="text-white text-4xl">unavailnle</div>
+							<div className="loader "></div>
 						)}
 					</div>
 				</TabsContent>
@@ -169,7 +169,7 @@ export default function Dashboard() {
 								))
 						) : (
 							// <p className="text-white text-4xl">{lessonData.length}</p>
-							<div className="text-white text-4xl">unavailnle</div>
+							<div className="loader"></div>
 						)}
 					</div>
 				</TabsContent>
@@ -205,7 +205,7 @@ export default function Dashboard() {
 								))
 						) : (
 							// <p className="text-white text-4xl">{lessonData.length}</p>
-							<div className="text-white text-4xl">unavailnle</div>
+							<div className="loader "></div>
 						)}
 					</div>
 				</TabsContent>
@@ -241,7 +241,7 @@ export default function Dashboard() {
 								))
 						) : (
 							// <p className="text-white text-4xl">{lessonData.length}</p>
-							<div className="text-white text-4xl">unavailnle</div>
+							<div className="loader "></div>
 						)}
 					</div>
 				</TabsContent>
@@ -277,7 +277,7 @@ export default function Dashboard() {
 								))
 						) : (
 							// <p className="text-white text-4xl">{lessonData.length}</p>
-							<div className="text-white text-4xl">unavailnle</div>
+							<div className="loader "></div>
 						)}
 					</div>
 				</TabsContent>

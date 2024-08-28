@@ -1,17 +1,24 @@
-import lessons from "@/data/course-info";
+"use client";
 import { ThumbsDownIcon, ThumbsUpIcon } from "lucide-react";
 import Link from "next/link";
-import { Metadata } from "next";
+import { useLesson } from "@/app/_context/lesson-context";
+// import { Metadata } from "next";
 import { Link as Linkicon } from "lucide-react";
-export const metadata: Metadata = {
-	title: "Lessons",
-	openGraph: { title: "Lessons" },
-	twitter: { title: "Lessons" },
-};
+// export const metadata: Metadata = {
+// 	title: "Lessons",
+// 	openGraph: { title: "Lessons" },
+// 	twitter: { title: "Lessons" },
+// };
 
 export default function Page({ params }: { params: { lesson: string } }) {
+	const { allLessons } = useLesson();
+	console.log(allLessons);
 	let currentLesson = params.lesson;
-	const lessonData = lessons.find((lesson) => lesson.id === currentLesson);
+	console.log(currentLesson);
+	const lessonData = allLessons.find(
+		(lesson: any) => lesson.id.toString() === currentLesson
+	);
+	console.log(lessonData);
 
 	if (!lessonData) {
 		return <div className="text-primary text-4xl">Lesson unavailable</div>;
@@ -20,7 +27,7 @@ export default function Page({ params }: { params: { lesson: string } }) {
 	return (
 		<div className="text-white flex flex-col items-center pt-10 gap-20 overflow-scroll h-[100vh]">
 			<div className="flex flex-col gap-1 font-semibold" id="lesson-header">
-				<h1 className="font-bold text-5xl">{lessonData.title}</h1>
+				<h1 className="font-bold text-3xl lg:text-5xl">{lessonData.title}</h1>
 				<h2 className=" self-center text-sm">
 					Level:{" "}
 					<span className={` ${lessonData.difficulty}`}>
@@ -31,23 +38,23 @@ export default function Page({ params }: { params: { lesson: string } }) {
 			<div className="border-[1px] border-gray-500 w-[90%] rounded-sm p-10  gap-20  flex flex-col">
 				<div id="lesson-intro" className="gap-5 flex-col flex">
 					<h3 className="text-primaryLight text-xl font-semibold">
-						{lessonData.article.intro.subtitle}
+						{lessonData.lesson_intro.title}
 					</h3>
-					<p>{lessonData.article.intro.text}</p>
+					<p>{lessonData.lesson_intro.body}</p>
 				</div>
 
 				<div id="lesson-body" className="gap-5 flex-col flex">
 					<h3 className="text-primaryLight text-xl font-semibold">
-						{lessonData.article.body.subtitle}
+						{lessonData.lesson_body.title}
 					</h3>
-					<p>{lessonData.article.body.text}</p>
+					<p>{lessonData.lesson_body.body}</p>
 				</div>
 
 				<div id="lesson-summary" className="gap-5 flex-col flex">
 					<h3 className="text-primaryLight text-xl font-semibold">
-						{lessonData.article.summary.subtitle}
+						{lessonData.lesson_summary.title}
 					</h3>
-					<p>{lessonData.article.summary.text}</p>
+					<p>{lessonData.lesson_summary.body}</p>
 				</div>
 
 				<Link
@@ -65,7 +72,9 @@ export default function Page({ params }: { params: { lesson: string } }) {
 
 				<h1>
 					Created by{" "}
-					<span className="text-primaryLight">{lessonData.creator}</span>
+					<span className="text-primaryLight">
+						{lessonData.author_username}
+					</span>
 				</h1>
 			</div>
 		</div>

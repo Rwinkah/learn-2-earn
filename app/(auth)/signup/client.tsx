@@ -84,7 +84,9 @@ export default function SignupForm() {
 
 	return (
 		<Form {...form}>
-			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
+			<form
+				onSubmit={form.handleSubmit(onSubmit)}
+				className="space-y-8 w-full h-full">
 				<FormField
 					control={form.control}
 					name="displayName"
@@ -154,17 +156,13 @@ export default function SignupForm() {
 									{...field}
 								/>
 							</FormControl>
-							<a
-								className=" self-end text-primary font-medium text-sm"
-								href="/reset-password">
-								Forgot password?
-							</a>
+
 							<h3 className="text-center pt-[40px]">
-								Don&apos;t have an account?{" "}
+								Have an account?{" "}
 								<Link
 									className="text-primary font-medium underline"
-									href="/signup">
-									Sign up
+									href="/login">
+									Login
 								</Link>
 							</h3>
 							<FormMessage />

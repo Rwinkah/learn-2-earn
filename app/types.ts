@@ -28,13 +28,13 @@ export type difficulty =
 	| "idolo";
 
 export interface ArticleSubObject {
-	subtitle: string;
-	text: string;
+	title: string;
+	body: string;
 }
 
 export interface Questions {
-	ques: string;
-	ans: string;
+	question: string;
+	answer: string;
 	alt1: string;
 	alt2: string;
 }
@@ -45,11 +45,9 @@ export interface Lesson {
 	author_username: string;
 	difficulty: difficulty;
 	quiz: Questions[];
-	article: {
-		intro: ArticleSubObject;
-		body: ArticleSubObject;
-		summary: ArticleSubObject;
-	};
+	lesson_intro: ArticleSubObject;
+	lesson_body: ArticleSubObject;
+	lesson_summary: ArticleSubObject;
 	lesson_description: string;
 	// img: StaticImageData;
 	tags: LessonTags[];
