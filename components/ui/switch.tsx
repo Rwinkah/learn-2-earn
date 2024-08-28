@@ -12,7 +12,7 @@ const Switch = React.forwardRef<
 >(({ className, ...props }, ref) => (
 	<SwitchPrimitives.Root
 		className={cn(
-			"peer inline-flex h-10 w-[80px] shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-[#35363A]",
+			"peer inline-flex h-[34px] w-[73px] shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-[#35363A]",
 			className
 		)}
 		{...props}
@@ -21,7 +21,7 @@ const Switch = React.forwardRef<
 			className={cn(
 				" items-center w-fit h-fit flex pointer-events-none   rounded-full bg-[#130C16] shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-9 data-[state=unchecked]:translate-x-0"
 			)}>
-			<MoonStar size={40} color="white" />
+			<MoonStar size={30} color="white" />
 		</SwitchPrimitives.Thumb>
 	</SwitchPrimitives.Root>
 ));

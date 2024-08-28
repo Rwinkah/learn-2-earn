@@ -10,7 +10,7 @@ export default function AuthLayout({
 	return (
 		<div
 			id="Auth-Page"
-			className="w-full overflow-y-scroll text-white bg-black h-full">
+			className="w-[100%] overflow-y-scroll text-white bg-black h-full">
 			<ToastContainer containerId={"authentication"} />
 			<div className="flex h-full items-center">
 				<div

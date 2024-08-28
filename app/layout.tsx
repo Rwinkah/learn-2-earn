@@ -39,8 +39,10 @@ export default function RootLayout({
 	children: ReactNode;
 }>) {
 	return (
-		<html lang="en" className="max-w-[100vw] h-[100vh] overflow-y-scroll">
-			<body className="max-w-[100vw] h-full bg-[#130C16]">
+		<html
+			lang="en"
+			className="max-w-[100vw] items-center flex justify-center h-[100vh] overflow-y-scroll">
+			<body className="max-w-[100vw] w-full h-full flex flex-col items-center bg-[#130C16]">
 				<Providers>
 					<ClientLayout>{children}</ClientLayout>
 				</Providers>
