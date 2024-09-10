@@ -35,7 +35,7 @@ export default function Hamburger() {
 		handleLinkClick();
 	};
 	return (
-		<div className="xl:hidden">
+		<div className="3/2xl:hidden">
 			<Popover open={open} onOpenChange={setOpen}>
 				<PopoverTrigger asChild>
 					<Button className="" variant={"link"} onClick={() => setOpen(!open)}>

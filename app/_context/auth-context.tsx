@@ -7,6 +7,7 @@ import React, {
 	useEffect,
 } from "react";
 import { AuthContextType } from "../types";
+import Cookies from "js-cookie";
 // Define the shape of the context state
 
 // Create the context with a default value
@@ -26,6 +27,7 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 		setIsAuthenticated(false);
 		localStorage.removeItem("user");
 		sessionStorage.removeItem("user");
+		Cookies.remove("user");
 	};
 
 	useEffect(() => {

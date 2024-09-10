@@ -1,0 +1,228 @@
+.ql-container {
+    background-color: #130C16; /* Dark background */
+    /* color: #fff;  */
+}
+
+.ql-toolbar {
+    background-color: #000; /* Slightly lighter dark background */
+    border: #66666666
+    /* color: #fff;  */
+}
+
+
+
+.ql-toolbar .ql-picker-options {
+    background-color: #444; /* Dark background for picker options */
+   
+    /* color: #fff;  */
+}
+
+
+
+.ql-editor p {
+  color: white !important;
+}
+
+.ql-editor span {
+  color: white !important;
+}
+.ql-editor a {
+    color: #C455FF; /* Light blue color for links */
+}
+
+.ql-editor ul > li::before,
+.ql-editor ol > li::before {
+    color: #fff; /* Light color for bullets and numbers */
+}
+
+/* Ensure active toolbar buttons change color */
+.ql-toolbar .ql-active {
+    color: #C455FF !important; /* Light purple color for active buttons */
+}
+
+.ql-toolbar .ql-active .ql-stroke {
+    stroke: #C455FF !important; /* Light purple color for active buttons */
+}
+
+.ql-toolbar .ql-active .ql-fill {
+    fill: #C455FF !important; /* Light purple color for active buttons */
+}
+/* Change color of toolbar buttons on hover */
+.ql-toolbar button:hover,
+.ql-toolbar .ql-picker-label:hover,
+.ql-toolbar .ql-picker-item:hover {
+    color: #C455FF !important; /* Light purple color for hovered buttons */
+}
+
+.ql-toolbar button:hover .ql-stroke,
+.ql-toolbar .ql-picker-label:hover .ql-stroke,
+.ql-toolbar .ql-picker-item:hover .ql-stroke {
+    stroke: #C455FF !important; /* Light purple color for hovered icons */
+}
+
+.ql-toolbar button:hover .ql-fill,
+.ql-toolbar .ql-picker-label:hover .ql-fill,
+.ql-toolbar .ql-picker-item:hover .ql-fill {
+    fill: #C455FF !important; /* Light purple color for hovered icons */
+}
+
+/* Custom numbering for ordered lists in React Quill editor */
+.ql-editor ol {
+    list-style-type: none; /* Remove default numbering */
+    counter-reset: custom-counter; /* Create a counter */
+    padding-left: 20px; /* Add space for custom numbering */
+  }
+  
+  .ql-editor ol li {
+    counter-increment: custom-counter; /* Increment the counter for each list item */
+    position: relative; /* Positioning for pseudo-element */
+    padding-left: 30px; /* Add space for the custom number */
+  }
+  
+  .ql-editor ol li::before {
+    content: counter(custom-counter, upper-roman) '. '; /* Use upper-roman, decimal, lower-alpha, etc. */
+    position: absolute;
+    left: 0; /* Position the custom number */
+    color: #C455FF; /* Change color of the custom number */
+    font-weight: bold; /* Style the custom number */
+  }
+  
+  /* Example: For lowercase letters */
+  .ql-editor ol.custom-lower-alpha {
+    counter-reset: custom-counter-alpha; 
+  }
+  
+  .ql-editor ol.custom-lower-alpha li {
+    counter-increment: custom-counter-alpha;
+  }
+  
+  .ql-editor ol.custom-lower-alpha li::before {
+    content: counter(custom-counter-alpha, lower-alpha) '. ';
+  }
+  
+  /* Example: For uppercase letters */
+  .ql-editor ol.custom-upper-alpha {
+    counter-reset: custom-counter-upper-alpha;
+  }
+  
+  .ql-editor ol.custom-upper-alpha li {
+    counter-increment: custom-counter-upper-alpha;
+  }
+  
+  .ql-editor ol.custom-upper-alpha li::before {
+    content: counter(custom-counter-upper-alpha, upper-alpha) '. ';
+  }
+  
+
+  /* Custom bullet list styling */
+.ql-editor ul {
+    list-style-type: none; /* Remove default bullets */
+    padding-left: 20px; /* Add space for custom bullets */
+  }
+  
+  .ql-editor ul li {
+    position: relative; /* Positioning for pseudo-element */
+    padding-left: 20px; /* Add space for custom bullet */
+  }
+  
+  /* Custom round bullet */
+  .ql-editor ul li::before {
+    content: '•'; /* Custom bullet character, can be changed to any symbol */
+    position: absolute;
+    left: 0; /* Position the custom bullet */
+    color: #C455FF; /* Change color of the bullet */
+    font-size: 1.2em; /* Adjust size if needed */
+  }
+  
+  /* Example: Square bullets */
+  /* .ql-editor ul.custom-square li::before {
+    content: '■'; 
+  } */
+
+  /* Example: Diamond bullets */
+  /* .ql-editor ul.custom-diamond li::before {
+    content: '◆';\
+  } */
+
+
+  .ql-syntax {
+    background-color: purple;
+    padding: 8px;
+  }
+
+  .ql-toolbar.ql-snow {
+    border: 1px solid#66666666;
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue','Helvetica','Arial',sans-serif;
+    padding: 8px
+}
+
+.ql-container.ql-snow {
+  border: 1px solid #6666
+}
+
+
+/* Tooltip container */
+.ql-toolbar button {
+  position: relative;
+  cursor: pointer;
+}
+
+/* Tooltip text */
+.ql-toolbar button::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%; /* Position above the element */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 5px;
+  border-radius: 3px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+  z-index: 10;
+}
+
+/* Show the tooltip text on hover */
+.ql-toolbar button:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Specific tooltips for each button */
+.ql-toolbar .ql-bold::after {
+  content: 'Bold';
+}
+
+.ql-toolbar .ql-italic::after {
+  content: 'Italic';
+}
+
+.ql-toolbar .ql-underline::after {
+  content: 'Underline';
+}
+.ql-toolbar .ql-strike::after {
+  content: 'Strikethrough';
+}
+.ql-toolbar .ql-link::after {
+  content: 'Link';
+}
+.ql-toolbar .ql-code-block::after {
+  content: 'Codeblock';
+}
+
+.ql-toolbar .ql-strike::after {
+  content: 'Strikethrough';
+}
+
+.ql-toolbar .ql-list[value="ordered"]::after {
+  content: 'Ordered List'
+}
+.ql-toolbar .ql-list[value="bullet"]::after {
+  content: 'Bullet List'
+}
+
+/* Add more tooltips as needed */

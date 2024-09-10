@@ -56,12 +56,12 @@ export default function Sidebar() {
 			{!isTabletAbove ? (
 				<></>
 			) : (
-				<div className=" text-[#8D8990] text-[18px] min-h-screen h-full bg-[#130C16] min-w-[270px] w-full border-r-[1px] border-r-[#66666666]">
+				<div className=" flex w-full flex-col items-center text-[#8D8990] text-[18px] min-h-screen h-full bg-[#130C16]  max-w-full border-r-[1px] border-r-[#66666666]">
 					<div
 						id="logo"
-						className="flex  pt-6 pb-2 max-h-[85px] items-center justify-normal  border-b-[#66666666] p-10 ">
+						className="flex w-full  pt-6 pb-2 max-h-[85px] items-center   border-b-[#66666666] justify-center ">
 						{/* <Image className="" src={book} alt="logo" /> */}
-						<h6 className="self-center mt-2 ml-[4px] font-semibold flex items-center gap-2">
+						<h6 className="self-center mt-2 ml-[4px] font-semibold flex w-full justify-center items-center gap-2">
 							<Image src={mainLogo} alt="logo" />
 							<span className="font-medium text-[#DCD0E6] ">OnboardMe</span>
 						</h6>
@@ -152,7 +152,7 @@ export default function Sidebar() {
 								</Button>
 							</Link>
 						</div>
-						<div className="flex flex-col gap-4 ">
+						<div className="flex flex-col gap-4 p-5 ">
 							<Link href={"/profile"}>
 								<Button
 									// onClick={() => handleNavClick("profile")}

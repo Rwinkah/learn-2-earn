@@ -47,10 +47,7 @@ export default function Page({ params }: { params: { quiz: string } }) {
 		console.log(`Final Score: ${finalScore}`);
 		setSubmitted(true);
 
-		if (
-			finalScore > 7 &&
-			!user.onboardUser?.completed_quiz?.includes(lessonData.title)
-		) {
+		if (finalScore > 7) {
 			try {
 				const refreshToken = localStorage.getItem("refresh_token");
 
@@ -139,21 +136,21 @@ export default function Page({ params }: { params: { quiz: string } }) {
 	) : (
 		<div
 			id="quiz-header"
-			className=" bg-[#2a0b38] pt-10 h-[100vh] self-center flex flex-col items-center gap-4">
+			className=" bg-[#2a0b38] pt-10 h-[100vh] w-full self-center flex flex-col items-center gap-4">
 			<h1 className="font-bold text-4xl text-white">
 				<span className="text-primaryLight">Onboard</span>Me Quiz
 			</h1>
 			<h2 className="text-white text-2xl font-semibold">{lessonData.title}</h2>
 			<div className="flex flex-col justify-between pb-20 h-full mt-40 text-3xl  text-white md:w-full text-wrap w-4/5 font-semibold text-center">
 				{score < 8 ? (
-					<div className="flex flex-col gap-8">
+					<div className="flex flex-col w-full gap-8">
 						<h3> Scored less than 80%, try again </h3>
 						<h4>
 							Score: <span className="text-red-700">{score}/10</span>
 						</h4>
 					</div>
 				) : (
-					<div className="flex flex-col gap-8">
+					<div className="flex flex-col w-full  gap-8">
 						<h3> You passed! and might be eliible for rewards </h3>
 						<h4>
 							Score: <span className="text-green-700">{score}/10</span>

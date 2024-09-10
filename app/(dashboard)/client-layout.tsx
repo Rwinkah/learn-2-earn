@@ -23,9 +23,12 @@ export default function ClientLayout({
 
 	return (
 		<main
-			className="lg:grid grid-cols-3 text-[#B2AFB4] gap-0 h-[100vh] bg-[#130C16] max-w-[1440px] overflow-hidden"
+			className="3/2xl:grid grid-cols-3 text-[#B2AFB4] gap-0 h-[100vh] bg-[#130C16] max-w-[1440px] overflow-hidden"
 			style={{ gridTemplateColumns: "18% 64% 18%" }}>
-			<RespContainer class_full="" hide={true} class_sm="bg-black">
+			<RespContainer
+				class_full="3/2xl:flex hidden"
+				hide={true}
+				class_sm="bg-black">
 				<Sidebar />
 			</RespContainer>
 

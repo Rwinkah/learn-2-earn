@@ -1,4 +1,5 @@
 "use client";
+import Cookies from "js-cookie";
 
 import { ReactNode, useEffect, useState } from "react";
 import { useUser } from "./_context/user-context";
@@ -13,7 +14,7 @@ export default function ClientLayout({
 	const lesson = useLesson();
 
 	useEffect(() => {
-		const storedUserData = sessionStorage.getItem("user");
+		const storedUserData = Cookies.get("user");
 		const storedLesson = sessionStorage.getItem("lessons");
 
 		if (storedUserData) {

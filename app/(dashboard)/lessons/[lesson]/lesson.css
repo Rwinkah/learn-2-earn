@@ -1,0 +1,73 @@
+.body-style, .body-style * {
+  color: white !important;
+}
+ ul > li::before,
+ ol > li::before {
+    color: #fff; /* Light color for bullets and numbers */
+}
+ ol {
+    list-style-type: none; /* Remove default numbering */
+    counter-reset: custom-counter; /* Create a counter */
+    padding-left: 20px; /* Add space for custom numbering */
+  }
+  
+   ol li {
+    counter-increment: custom-counter; /* Increment the counter for each list item */
+    position: relative; /* Positioning for pseudo-element */
+    padding-left: 30px; /* Add space for the custom number */
+  }
+  
+   ol li::before {
+    content: counter(custom-counter, upper-roman) '. '; /* Use upper-roman, decimal, lower-alpha, etc. */
+    position: absolute;
+    left: 0; /* Position the custom number */
+    color: #C455FF; /* Change color of the custom number */
+    font-weight: bold; /* Style the custom number */
+  }
+  
+  /* Example: For lowercase letters */
+   ol.custom-lower-alpha {
+    counter-reset: custom-counter-alpha; 
+  }
+  
+   ol.custom-lower-alpha li {
+    counter-increment: custom-counter-alpha;
+  }
+  
+   ol.custom-lower-alpha li::before {
+    content: counter(custom-counter-alpha, lower-alpha) '. ';
+  }
+  
+  /* Example: For uppercase letters */
+   ol.custom-upper-alpha {
+    counter-reset: custom-counter-upper-alpha;
+  }
+  
+   ol.custom-upper-alpha li {
+    counter-increment: custom-counter-upper-alpha;
+  }
+  
+   ol.custom-upper-alpha li::before {
+    content: counter(custom-counter-upper-alpha, upper-alpha) '. ';
+  }
+  
+
+  /* Custom bullet list styling */
+ ul {
+    list-style-type: none; /* Remove default bullets */
+    padding-left: 20px; /* Add space for custom bullets */
+  }
+  
+   ul li {
+    position: relative; /* Positioning for pseudo-element */
+    padding-left: 20px; /* Add space for custom bullet */
+  }
+  
+  /* Custom round bullet */
+   ul li::before {
+    content: '•'; /* Custom bullet character, can be changed to any symbol */
+    position: absolute;
+    left: 0; /* Position the custom bullet */
+    color: #C455FF; /* Change color of the bullet */
+    font-size: 1.2em; /* Adjust size if needed */
+  }

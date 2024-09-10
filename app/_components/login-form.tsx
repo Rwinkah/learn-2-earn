@@ -54,8 +54,8 @@ export function LoginForm() {
 					// Set authentication tokens
 					localStorage.setItem("access_token", response.data.access);
 					localStorage.setItem("refresh_token", response.data.refresh);
-					Cookies.set("access_token", response.data.access);
-					Cookies.set("refresh_token", response.data.refresh);
+					Cookies.set("access_token", response.data.access, { expires: 1 });
+					Cookies.set("refresh_token", response.data.refresh, { expires: 1 });
 
 					// Display success messages
 					resolve(`Welcome!, ${response.data.username}`);
@@ -73,7 +73,7 @@ export function LoginForm() {
 					};
 
 					user.updateUser(loggedUser);
-					sessionStorage.setItem("user", JSON.stringify(loggedUser));
+					Cookies.set("user", JSON.stringify(loggedUser), { expires: 1 });
 
 					setTimeout(() => {
 						router.push("/home"); // Replace with your desired path

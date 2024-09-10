@@ -1,4 +1,5 @@
 "use client";
+import "./lesson.css";
 import { ThumbsDownIcon, ThumbsUpIcon } from "lucide-react";
 import Link from "next/link";
 import { useLesson } from "@/app/_context/lesson-context";
@@ -12,9 +13,8 @@ import { Link as Linkicon } from "lucide-react";
 
 export default function Page({ params }: { params: { lesson: string } }) {
 	const { allLessons } = useLesson();
-	console.log(allLessons);
+	const isHTML = (content: string) => /<\/?[a-z][\s\S]*>/i.test(content);
 	let currentLesson = params.lesson;
-	console.log(currentLesson);
 	const lessonData = allLessons.find(
 		(lesson: any) => lesson.id.toString() === currentLesson
 	);
@@ -37,24 +37,51 @@ export default function Page({ params }: { params: { lesson: string } }) {
 			</div>
 			<div className="border-[1px] border-gray-500 w-[90%] rounded-sm p-10  gap-20  flex flex-col">
 				<div id="lesson-intro" className="gap-5 flex-col flex">
-					<h3 className="text-primaryLight text-xl font-semibold">
-						{lessonData.lesson_intro.title}
+					<h3 className="text-primaryLight text-xl font-semibold capitalize">
+						{lessonData.lesson_intro.title.toLowerCase()}
 					</h3>
-					<p>{lessonData.lesson_intro.body}</p>
+					{isHTML(lessonData.lesson_intro.body) ? (
+						<span
+							className="body-style"
+							dangerouslySetInnerHTML={{
+								__html: lessonData.lesson_intro.body,
+							}}
+						/>
+					) : (
+						<p>{lessonData.lesson_intro.body}</p>
+					)}{" "}
 				</div>
 
 				<div id="lesson-body" className="gap-5 flex-col flex">
-					<h3 className="text-primaryLight text-xl font-semibold">
-						{lessonData.lesson_body.title}
+					<h3 className="text-primaryLight text-xl font-semibold capitalize">
+						{lessonData.lesson_body.title.toLowerCase()}
 					</h3>
-					<p>{lessonData.lesson_body.body}</p>
+					{isHTML(lessonData.lesson_body.body) ? (
+						<span
+							className="body-style"
+							dangerouslySetInnerHTML={{
+								__html: lessonData.lesson_body.body,
+							}}
+						/>
+					) : (
+						<p>{lessonData.lesson_body.body}</p>
+					)}{" "}
 				</div>
 
 				<div id="lesson-summary" className="gap-5 flex-col flex">
-					<h3 className="text-primaryLight text-xl font-semibold">
-						{lessonData.lesson_summary.title}
+					<h3 className="text-primaryLight text-xl font-semibold capitalize">
+						{lessonData.lesson_summary.title.toLowerCase()}
 					</h3>
-					<p>{lessonData.lesson_summary.body}</p>
+					{isHTML(lessonData.lesson_summary.body) ? (
+						<span
+							className="body-style"
+							dangerouslySetInnerHTML={{
+								__html: lessonData.lesson_summary.body,
+							}}
+						/>
+					) : (
+						<p>{lessonData.lesson_summary.body}</p>
+					)}{" "}
 				</div>
 
 				<Link

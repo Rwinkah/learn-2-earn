@@ -1,11 +1,17 @@
 "use client";
+import DynamicQuill from "./_components/dynamic-quill";
+import DOMPurify from "dompurify";
 import { z } from "zod";
 import axios from "axios";
-import { useState } from "react";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useState, useEffect, useRef } from "react";
+import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import ReactQuill from "react-quill";
+import "quill/dist/quill.snow.css";
+
+import "./_components/custom-quill.css";
 import {
 	Form,
 	FormControl,
@@ -27,7 +33,9 @@ import {
 import { Captions, PanelTop } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { toast, ToastContainer } from "react-toastify";
+import Toolbar from "quill/modules/toolbar";
 
+//SCHEMA DESIGN ELEMENTS
 const lessonContentSchema = z.object({
 	title: z.string({ required_error: "A required field" }),
 	body: z.string({ required_error: "A required field" }),
@@ -53,8 +61,38 @@ const lessonSchema = z.object({
 	tags: z.array(LessonTags),
 	quiz: z.array(quizQuestion),
 });
+
+//BACKEND API URL
 const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 export default function LessonForm() {
+	//TEXT EDITOR SETUP
+
+	const toolbarContent = [
+		["bold", "underline", "strike", "italic", "link", "code-block"],
+		[{ list: "ordered" }, { list: "bullet" }],
+	];
+
+	// Define the tooltips for the toolbar buttons
+	const tooltips: { [key: string]: string } = {
+		bold: "Bold",
+		underline: "Underline",
+		strike: "Strike",
+		italic: "Italic",
+		link: "Insert Link",
+		"code-block": "Code Block",
+		"list-ordered": "Ordered List",
+		"list-bullet": "Bullet List",
+		"list-check": "Checklist",
+	};
+
+	const quillModule = {
+		toolbar: toolbarContent,
+		clipboard: {
+			matchVisual: false,
+		},
+	};
+
 	const [isdisabled, setIsDisabled] = useState<boolean>(false);
 	const { push } = useRouter();
 	const form = useForm<z.infer<typeof lessonSchema>>({
@@ -68,6 +106,10 @@ export default function LessonForm() {
 		// 	quiz: [],
 		// },
 	});
+
+	function testSubmit(values: z.infer<typeof lessonSchema>) {
+		console.log(values.difficulty);
+	}
 
 	async function handleSubmit(values: z.infer<typeof lessonSchema>) {
 		toast.promise(
@@ -272,17 +314,28 @@ export default function LessonForm() {
 							)}
 						/>
 
-						<FormField
+						<Controller
 							control={form.control}
 							name="lesson_intro.body"
 							render={({ field }) => (
-								<FormItem className="flex gap-4 items-center justify-between">
+								<FormItem className="flex  gap-4 items-center justify-between">
 									<FormLabel className="mt-2">Intro content</FormLabel>
 									<FormControl className="max-w-[600px]">
-										<Textarea
+										{/* <Textarea
 											className="m-0 border-solid bg-transparent  border-[#66666666]  border-[1px]"
 											placeholder="Content for your intro"
 											{...field}
+										/> */}
+										<DynamicQuill
+											className="w-full"
+											id="intro-field"
+											modules={quillModule}
+											theme="snow"
+											value={field.value}
+											onChange={(value: any) => {
+												const sanitizedValue = DOMPurify.sanitize(value);
+												field.onChange(sanitizedValue);
+											}}
 										/>
 									</FormControl>
 									{/* <FormMessage>Tell us the name of your lesson</FormMessage> */}
@@ -319,10 +372,16 @@ export default function LessonForm() {
 								<FormItem className="flex gap-4 items-center justify-between">
 									<FormLabel className="mt-2">Middle content</FormLabel>
 									<FormControl className="max-w-[600px]">
-										<Textarea
-											className="m-0 border-solid bg-transparent  border-[#66666666]  border-[1px]"
-											placeholder="Content for your main body"
-											{...field}
+										<DynamicQuill
+											id="middle-field"
+											className="w-full"
+											modules={quillModule}
+											value={field.value}
+											onChange={(value: any) => {
+												const sanitizedValue = DOMPurify.sanitize(value);
+												field.onChange(sanitizedValue);
+											}}
+											theme="snow"
 										/>
 									</FormControl>
 									{/* <FormMessage>Tell us the name of your lesson</FormMessage> */}
@@ -359,10 +418,16 @@ export default function LessonForm() {
 								<FormItem className="flex gap-4 items-center justify-between">
 									<FormLabel className="mt-2">Summary body</FormLabel>
 									<FormControl className="max-w-[600px]">
-										<Textarea
-											className="m-0 border-solid bg-transparent  border-[#66666666]  border-[1px]"
-											placeholder="Content for your summary"
-											{...field}
+										<DynamicQuill
+											className="w-full"
+											id="summary-field"
+											modules={quillModule}
+											theme="snow"
+											value={field.value}
+											onChange={(value) => {
+												const sanitizedValue = DOMPurify.sanitize(value);
+												field.onChange(sanitizedValue);
+											}}
 										/>
 									</FormControl>
 									{/* <FormMessage>Tell us the name of your lesson</FormMessage> */}
