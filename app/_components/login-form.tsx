@@ -126,7 +126,7 @@ export function LoginForm() {
 							<FormControl>
 								<Input
 									className="rounded-3xl bg-transparent border-gray-500 border-[1px] outline-none"
-									placeholder="vitalikbut@gmail.com"
+									placeholder="vitalikbut"
 									{...field}
 								/>
 							</FormControl>
