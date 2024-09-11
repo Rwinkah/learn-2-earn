@@ -1,4 +1,21 @@
 import { StaticImageData } from "next/image";
+import { z } from "zod";
+
+//ZOD SCHEMAS
+export const loginSchema = z.object({
+	username: z.string(),
+	password: z.string(),
+});
+
+export const signUpSchema = z.object({
+	displayName: z.string(),
+	email: z.string().email("invalid email"),
+	password: z.string(),
+	passwordConfirm: z.string(),
+});
+export type SignupSchema = z.infer<typeof signUpSchema>;
+export type LoginSchema = z.infer<typeof loginSchema>;
+
 export interface AuthContextType {
 	isAuthenticated: boolean;
 	login: () => void;

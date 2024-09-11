@@ -17,20 +17,15 @@ import {
 
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import { SignupSchema, signUpSchema } from "@/app/types";
+import { SignupHandler } from "@/app/utils/auth";
 // import 'react-toastify/dist/ReactToastify.css';
 const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-const signUpSchema = z.object({
-	displayName: z.string(),
-	email: z.string().email("invalid email"),
-	password: z.string(),
-	passwordConfirm: z.string(),
-});
-
 export default function SignupForm() {
 	const { push } = useRouter();
-	const form = useForm<z.infer<typeof signUpSchema>>({
+	const form = useForm<SignupSchema>({
 		resolver: zodResolver(signUpSchema),
 		defaultValues: {
 			displayName: "",
@@ -40,52 +35,11 @@ export default function SignupForm() {
 		},
 	});
 
-	async function onSubmit(values: z.infer<typeof signUpSchema>) {
-		if (values.password !== values.passwordConfirm) {
-			toast.error("Passwords do not match!");
-			return;
-		}
-
-		// fetch("http://localhost:8000/create-user", {
-		// 	method: "POST",
-		// 	headers: {
-		// 		"Content-Type": "application/json",
-		// 	},
-		// 	body: JSON.stringify({
-		// 		displayName: values.displayName,
-		// 		email: values.email,
-		// 		password: values.password,
-		// 	}),
-		// })
-		// 	.then((response) => {
-		// 		if (!response.ok) {
-		// 			throw new Error("Network response was not ok");
-		// 		}
-		// 		return response.json();
-		// 	})
-		// 	.then((data) => {
-		// 		toast.success("Account created successfully!");
-		// 		// Handle successful account creation (e.g., redirect to login page)
-		// 	})
-		// 	.catch((error) => {
-		// 		toast.error(`Error: ${error.message}`);
-		// 	});
-
-		const response = await axios.post(`${apiUrl}/create-user`, { values });
-		if (response.status === 201) {
-			toast.success("User created successfully, now redirecting to login page");
-		} else {
-			toast.error("User could not be created, an error has occured");
-		}
-		setTimeout(() => {
-			push("/login"); // Replace with your desired path
-		}, 2000);
-	}
-
 	return (
 		<Form {...form}>
+			<ToastContainer />
 			<form
-				onSubmit={form.handleSubmit(onSubmit)}
+				onSubmit={form.handleSubmit((values) => SignupHandler(values, push))}
 				className="space-y-8 w-full h-full">
 				<FormField
 					control={form.control}
