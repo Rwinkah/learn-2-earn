@@ -3,7 +3,7 @@ import QuizCard from "@/app/_components/quiz-card";
 // import lessons from "@/data/course-info";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { number } from "zod";
+import { boolean, number } from "zod";
 import { Button } from "@/components/ui/button";
 import { useLesson } from "@/app/_context/lesson-context";
 import axios from "axios";
@@ -18,6 +18,8 @@ export default function Page({ params }: { params: { quiz: string } }) {
 	const { push } = useRouter();
 	const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 	const { allLessons } = useLesson();
+	const [isWaiting, setIsWaiting] = useState<boolean>(true);
+	const [addedOxp, setAddedOxp] = useState<number>(0);
 	const user = useUser();
 	const router = useRouter();
 	let currentLesson = params.quiz;
@@ -39,6 +41,7 @@ export default function Page({ params }: { params: { quiz: string } }) {
 	}
 
 	const handleSubmit = async () => {
+		setIsWaiting(true);
 		const finalScore = answers.reduce(
 			(acc, answer) => acc + (answer?.isCorrect || 0),
 			0
@@ -88,9 +91,11 @@ export default function Page({ params }: { params: { quiz: string } }) {
 						},
 					}
 				);
+				setAddedOxp(response.data.oxp_added);
 			} catch (error: any) {
 				console.error("error updating xp", error);
 			} finally {
+				setIsWaiting(false);
 			}
 		}
 	};
@@ -141,20 +146,36 @@ export default function Page({ params }: { params: { quiz: string } }) {
 				<span className="text-primaryLight">Onboard</span>Me Quiz
 			</h1>
 			<h2 className="text-white text-2xl font-semibold">{lessonData.title}</h2>
-			<div className="flex flex-col justify-between pb-20 h-full mt-40 text-3xl  text-white md:w-full text-wrap w-4/5 font-semibold text-center">
+			<div className="flex flex-col justify-between pb-20 h-full mt-10 lg:mt-40 text-3xl  text-white md:w-full text-wrap w-4/5 font-semibold text-center">
 				{score < 8 ? (
-					<div className="flex flex-col w-full gap-8">
-						<h3> Scored less than 80%, try again </h3>
-						<h4>
-							Score: <span className="text-red-700">{score}/10</span>
-						</h4>
+					<div className="flex flex-col w-full items-center justify-center   gap-8">
+						<div className="flex flex-col  min-h-[50vh] p-8	  gap-8">
+							<h3> Scored less than 80%, try again </h3>
+							<h4>
+								Score: <span className="text-red-700">{score}/10</span>
+							</h4>
+						</div>
 					</div>
 				) : (
-					<div className="flex flex-col w-full  gap-8">
-						<h3> You passed! and might be eliible for rewards </h3>
-						<h4>
-							Score: <span className="text-green-700">{score}/10</span>
-						</h4>
+					<div className="flex flex-col w-full items-center justify-center   gap-8">
+						<div className="flex flex-col  min-h-[50vh] 	  gap-8">
+							<h3 className="text-[24px]"> You passed!</h3>
+							<h4 className="font-medium text-[24px]">
+								Score: <span className="text-green-700">{score}/10</span>
+							</h4>
+							{isWaiting ? (
+								<div className="text-xl">
+									<div className="loading" />
+								</div>
+							) : (
+								<div className="flex text-xl justify-center items-center gap-4">
+									<span className="text- text-primaryLight t	">
+										{addedOxp} OXP
+									</span>
+									acquired!
+								</div>
+							)}
+						</div>
 					</div>
 				)}
 

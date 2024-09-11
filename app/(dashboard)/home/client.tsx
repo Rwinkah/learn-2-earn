@@ -6,15 +6,18 @@ import LessonCard from "@/app/_components/lesson-card";
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import axios, { AxiosResponse } from "axios";
-import { useUser } from "@/app/_context/user-context";
+import axios from "axios";
 import { useLesson } from "@/app/_context/lesson-context";
-import { Lesson } from "@/app/types";
+import { useLeaderboard } from "@/app/_context/leader-context";
+import { LeaderboardUser, Lesson } from "@/app/types";
 
 export default function Dashboard() {
 	const [lessonData, setLessonData] = useState<Lesson[]>([]);
+	const [leaderboard, setLeaderboard] = useState<LeaderboardUser[]>([]);
 	const { push } = useRouter();
 	const { updateLesson, allLessons } = useLesson();
+	const { updateLeaderBoard, Leaderboard } = useLeaderboard();
+
 	const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 	const updateLessonData = (data: any) => {
@@ -24,8 +27,16 @@ export default function Dashboard() {
 		console.log(data);
 		console.log(allLessons);
 	};
+	const updateLeaderBoardData = (data: any) => {
+		setLeaderboard(data);
+		sessionStorage.setItem("leaderboard", JSON.stringify(data));
+		updateLeaderBoard(data);
+		console.log(data);
+		console.log(Leaderboard);
+	};
 
 	useEffect(() => {
+		let newAccessToken = "";
 		const fetchLessonData = async () => {
 			try {
 				const refreshToken = localStorage.getItem("refresh_token");
@@ -39,7 +50,6 @@ export default function Dashboard() {
 					refresh: refreshToken,
 				});
 
-				let newAccessToken = "";
 				if (newTokenResponse.status === 200) {
 					newAccessToken = newTokenResponse.data.access;
 					localStorage.setItem("access_token", newAccessToken);
@@ -55,7 +65,7 @@ export default function Dashboard() {
 
 				const lessonResponse = await axios.get(`${apiUrl}/lesson-data`, {
 					headers: {
-						Authorization: `Bearer ${newAccessToken}`,
+						Authorization: `Bearer ${localStorage.getItem("access_token")}`,
 					},
 				});
 
@@ -76,6 +86,23 @@ export default function Dashboard() {
 			}
 		};
 
+		const fetchLeaderboard = async () => {
+			try {
+				const leaderboardResponse = await axios.get(
+					`${apiUrl}/get-leaderboard`,
+					{
+						headers: {
+							Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+						},
+					}
+				);
+				updateLeaderBoardData(leaderboardResponse.data);
+			} catch (error) {
+				console.log("Error fetching leaderboard", error);
+			}
+		};
+
+		fetchLeaderboard();
 		fetchLessonData();
 	}, []);
 
@@ -83,7 +110,7 @@ export default function Dashboard() {
 		<div className="flex-col flex-shrink w-full h-[100vh]  text-black">
 			{/* <h1 className="font-bold text-4xl mb-6 text-center text-white">Welcome Learner!</h1> */}
 			<Tabs defaultValue="Normie" className=" w-full" id="tab-element">
-				<TabsList className="w-[100vw] h-fit  tabs-scrollbar pb-5 overflow-x-scroll z-[1000] item-top justify-normal pl-10  border-b-[1px]  border-[#FFFFFF33] ">
+				<TabsList className="w-[100vw] 3/2xl:w-full h-fit  tabs-scrollbar pb-5 overflow-x-scroll z-[1000] item-top justify-normal pl-10  border-b-[1px]  border-[#FFFFFF33] ">
 					<TabsTrigger className="text-lg" value="Normie">
 						Normie
 					</TabsTrigger>
@@ -106,7 +133,7 @@ export default function Dashboard() {
 				</TabsList>
 				<TabsContent
 					value="Normie"
-					className="overflow-y-scroll h-[80vh]  pr-0   ">
+					className="w-full overflow-y-scroll h-[80vh]  pr-0   ">
 					<div className="flex flex-col gap-3 text-[#F4E7FFE5] p-10 lg:border-[#FFFFFF33] border-b-[1px]">
 						<h1 className="font-semibold text-3xl ">Welcome to web3!</h1>
 						<p className="text-[#B2AFB4] ">
@@ -174,8 +201,9 @@ export default function Dashboard() {
 					</div>
 				</TabsContent>
 				<TabsContent
+					w-full
 					value="Intermediate"
-					className="overflow-scroll h-[80vh]  pr-0   ">
+					className="w-full overflow-scroll h-[80vh]  pr-0   ">
 					<div className="flex flex-col gap-3 text-[#F4E7FFE5] p-10 lg:border-[#FFFFFF33] border-b-[1px]">
 						<h1 className="font-semibold text-3xl ">
 							Elevate Your web3 Skills!
@@ -211,7 +239,7 @@ export default function Dashboard() {
 				</TabsContent>
 				<TabsContent
 					value="Expert"
-					className="overflow-scroll h-[80vh]  pr-0   ">
+					className="w-full overflow-scroll h-[80vh]  pr-0   ">
 					<div className="flex flex-col gap-3 text-[#F4E7FFE5] p-10 lg:border-[#FFFFFF33] border-b-[1px]">
 						<h1 className="font-semibold text-3xl ">
 							Conquer the Challenges of web3!
@@ -247,7 +275,7 @@ export default function Dashboard() {
 				</TabsContent>
 				<TabsContent
 					value="Idolo"
-					className="overflow-scroll h-[80vh]  pr-0   ">
+					className="w-full overflow-scroll h-[80vh]  pr-0   ">
 					<div className="flex flex-col gap-3 text-[#F4E7FFE5] p-10 lg:border-[#FFFFFF33] border-b-[1px]">
 						<h1 className="font-semibold text-3xl ">
 							Become a web3 Visionary!

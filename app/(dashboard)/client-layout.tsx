@@ -12,7 +12,8 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useUser } from "../_context/user-context";
-import { OnboardUser } from "../types";
+import { useLeaderboard } from "../_context/leader-context";
+import { LeaderboardUser, OnboardUser } from "../types";
 export default function ClientLayout({
 	children,
 }: {
@@ -20,11 +21,15 @@ export default function ClientLayout({
 }) {
 	const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 	const user = useUser();
+	const { Leaderboard } = useLeaderboard();
+
+	const sortedLeaderboard = Leaderboard.sort(
+		(a, b) => b.onboardXP - a.onboardXP
+	);
+	console.log("sorted leaderboard :", sortedLeaderboard);
 
 	return (
-		<main
-			className="3/2xl:grid grid-cols-3 text-[#B2AFB4] gap-0 h-[100vh] bg-[#130C16] max-w-[1440px] overflow-hidden"
-			style={{ gridTemplateColumns: "18% 64% 18%" }}>
+		<main className="flex  text-[#B2AFB4] gap-0 h-[100vh] bg-[#130C16] min-w-full justify-center overflow-hidden">
 			<RespContainer
 				class_full="3/2xl:flex hidden"
 				hide={true}
@@ -35,7 +40,7 @@ export default function ClientLayout({
 			<RespContainer
 				id="current-page"
 				hide={false}
-				class_full="flex flex-col min-w-full pb-10 justify-between min-h-full h-auto bg-[#08020A] border-l-[1px] border-[#66666666]"
+				class_full="flex flex-col min-w-full 3/2xl:w-[950px]  pb-10 justify-between min-h-full h-auto bg-[#08020A] border-l-[1px] border-[#66666666]"
 				class_sm="  w-full pb-5 mb-20 bg-black">
 				<div
 					id="layout-wrapper"
@@ -48,8 +53,8 @@ export default function ClientLayout({
 				</div>
 			</RespContainer>
 			<RespContainer hide={true} class_sm="display-none">
-				<div className=" h-[100vh] bg-[#130c16] text-white border-l border-[#66666666]  flex flex-col gap-8 items-center w-full">
-					<div className=" w-full p-6 pb-6 flex flex-col gap-8">
+				<div className=" 3/2xl:flex  2xl:min-w-[300px] p-4 h-[100vh] bg-[#130c16] text-white border-l border-[#66666666]  hidden flex-col gap-8 items-center w-full">
+					<div className=" w-full p-2 pb-6 flex flex-col gap-8">
 						<div className=" w-fit ] flex gap-4 text-2xl font-semibold mb-10">
 							<div className="rounded-full w-11 h-11 overflow-hidden flex">
 								<Image
@@ -68,12 +73,38 @@ export default function ClientLayout({
 							</div>
 						</div>
 					</div>
-					<div className=" p-6 flex flex-col gap-8 w-full">
-						<h2 className="text-white text-2xl font-semibold ">Leaderboard</h2>
-						<div className="w-full   h-[60vh] ] border-[#66666666] flex flex-col justify-center items-center">
-							<h2 className="text-xl text-bold text-center">
-								No information available
-							</h2>
+					<div id="leaderboard" className="p-4 flex flex-col gap-8 w-full ">
+						<h2 className="text-white text-2xl font-semibold m-auto ">
+							Leaderboard
+						</h2>
+						<div className="w-full h-[400px]  overflow-y-scroll border-[#66666666] flex flex-col  items-center">
+							{sortedLeaderboard.length > 0 ? (
+								<div className="w-full text-sm flex flex-col gap-4">
+									{sortedLeaderboard.map(
+										(object: LeaderboardUser, index: any) => (
+											<span
+												key={index}
+												className="flex  border-[1px] w-full rounded-lg shadow-inner shadow-[primaryColor] justify-between p-4 border-b border-[#66666666]">
+												<span
+													className="text-white  overflow-hidden "
+													title={object.user.username}>
+													<p>
+														{index + 1}.{" "}
+														{object.user.username.length > 7
+															? `${object.user.username.slice(0, 7)}...`
+															: object.user.username}
+													</p>
+												</span>
+												<span className="text-white">
+													{object.onboardXP} OXP
+												</span>
+											</span>
+										)
+									)}
+								</div>
+							) : (
+								<div className="loader" />
+							)}
 						</div>
 					</div>
 				</div>

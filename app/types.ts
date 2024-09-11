@@ -10,6 +10,15 @@ export interface CustomIcon {
 	spaceFill?: string;
 }
 
+type leader = {
+	username: string;
+};
+
+export interface LeaderboardUser {
+	user: leader;
+	onboardXP: number;
+}
+
 export interface LessonTags {
 	tag: string;
 }
