@@ -47,7 +47,9 @@ export default function LessonCard({
 					className={`font-light  text-sm mb-2 pb-3 flex items-center  w-full ml-auto ${difficulty}`}>
 					<div className="ml-auto">
 						author:{" "}
-						<span className={`${difficulty} font-medium`}>{creator}</span>
+						<span className={`${difficulty.toLowerCase()} font-medium`}>
+							{creator}
+						</span>
 					</div>
 				</div>
 				<div id="header" className="flex flex-col gap-1">

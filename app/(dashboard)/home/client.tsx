@@ -144,7 +144,9 @@ export default function Dashboard() {
 					<div className=" flex flex-col gap-10 pt-10 mb-20 pl-4 pr-4 items-center ">
 						{lessonData.length > 0 ? (
 							lessonData
-								.filter((item: Lesson) => item.difficulty === "normie")
+								.filter(
+									(item: Lesson) => item.difficulty.toLowerCase() === "normie"
+								)
 								.map((item: Lesson) => (
 									<LessonCard
 										key={item.id}
@@ -180,7 +182,9 @@ export default function Dashboard() {
 					<div className=" flex flex-col gap-10 pt-10 pl-4 pr-4 items-center mb-[10rem]">
 						{lessonData.length > 0 ? (
 							lessonData
-								.filter((item: Lesson) => item.difficulty === "amateur")
+								.filter(
+									(item: Lesson) => item.difficulty.toLowerCase() === "amateur"
+								)
 								.map((item: Lesson) => (
 									<LessonCard
 										key={item.id}
@@ -217,7 +221,10 @@ export default function Dashboard() {
 					<div className=" flex flex-col gap-10 pt-10 pl-4 pr-4 items-center mb-[10rem]">
 						{lessonData.length > 0 ? (
 							lessonData
-								.filter((item: Lesson) => item.difficulty === "intermediate")
+								.filter(
+									(item: Lesson) =>
+										item.difficulty.toLowerCase() === "intermediate"
+								)
 								.map((item: Lesson) => (
 									<LessonCard
 										key={item.id}
@@ -253,7 +260,9 @@ export default function Dashboard() {
 					<div className=" flex flex-col gap-10 pt-10 pl-4 pr-4 items-center mb-[10rem]">
 						{lessonData.length > 0 ? (
 							lessonData
-								.filter((item: Lesson) => item.difficulty === "expert")
+								.filter(
+									(item: Lesson) => item.difficulty.toLowerCase() === "expert"
+								)
 								.map((item: Lesson) => (
 									<LessonCard
 										key={item.id}
@@ -289,7 +298,9 @@ export default function Dashboard() {
 					<div className=" flex flex-col gap-10 pt-10 pl-4 pr-4 items-center mb-[10rem]">
 						{lessonData.length > 0 ? (
 							lessonData
-								.filter((item: Lesson) => item.difficulty === "idolo")
+								.filter(
+									(item: Lesson) => item.difficulty.toLowerCase() === "idolo"
+								)
 								.map((item: Lesson) => (
 									<LessonCard
 										key={item.id}
