@@ -33,9 +33,9 @@ export default function ClientLayout({
 					break;
 				case "lesson_answered":
 					// Handle lesson answered
-					const updLesson = JSON.parse()
+					const updLesson = JSON.parse(data.lesson);
 					console.log("Lesson answered:");
-					newLessons = data.lesson;
+					newLessons = updLesson;
 					lesson.updateLesson(newLessons);
 
 					break;
