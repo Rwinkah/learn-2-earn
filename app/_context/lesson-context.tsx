@@ -10,7 +10,7 @@ import React, {
 import { Lesson } from "../types";
 interface LessonContextType {
 	allLessons: Lesson[];
-	updateLesson: (lesson: Lesson) => void;
+	updateLesson: (lesson: Lesson[]) => void;
 }
 export const LessonsContext = createContext<LessonContextType | undefined>(
 	undefined
