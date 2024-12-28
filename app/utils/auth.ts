@@ -169,8 +169,8 @@ export async function ResetConfirmHandler(
 					setTimeout(() => {
 						push("/login"); // Replace with your desired path
 					}, 2000);
-					return response
-\				}
+					return response;
+				}
 				// Handle different statuses and throw an error to trigger the error handler
 				if (response.status === 403) {
 					setIsDisabled(false);
