@@ -3,186 +3,209 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --background: #130C16;
-    --foreground: 222.2 84% 4.9%;
+	:root {
+		--background: #130c16;
+		--foreground: 222.2 84% 4.9%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+		--card: 0 0% 100%;
+		--card-foreground: 222.2 84% 4.9%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+		--popover: 0 0% 100%;
+		--popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 296, 85%, 29%;
-    --primary-foreground: 210 40% 98%;
+		--primary: 296, 85%, 29%;
+		--primary-foreground: 210 40% 98%;
 
-    --secondary: 294, 56%, 96%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+		--secondary: 294, 56%, 96%;
+		--secondary-foreground: 222.2 47.4% 11.2%;
 
-    --muted: 294, 56%, 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+		--muted: 294, 56%, 96%;
+		--muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 294, 56%, 96%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+		--accent: 294, 56%, 96%;
+		--accent-foreground: 222.2 47.4% 11.2%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+		--destructive: 0 84.2% 60.2%;
+		--destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+		--border: 214.3 31.8% 91.4%;
+		--input: 214.3 31.8% 91.4%;
+		--ring: 222.2 84% 4.9%;
 
-    --radius: 0.5rem;
-  }
+		--radius: 0.5rem;
+	}
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+	.dark {
+		--background: 222.2 84% 4.9%;
+		--foreground: 210 40% 98%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+		--card: 222.2 84% 4.9%;
+		--card-foreground: 210 40% 98%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+		--popover: 222.2 84% 4.9%;
+		--popover-foreground: 210 40% 98%;
 
-    --primary: 296, 85%, 29%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+		--primary: 296, 85%, 29%;
+		--primary-foreground: 222.2 47.4% 11.2%;
 
-    --secondary: 294, 56%, 96%;
-    --secondary-foreground: 210 40% 98%;
+		--secondary: 294, 56%, 96%;
+		--secondary-foreground: 210 40% 98%;
 
-    --muted: 294, 56%, 96%;
-    --muted-foreground: 215 20.2% 65.1%;
+		--muted: 294, 56%, 96%;
+		--muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 294, 56%, 96%;
-    --accent-foreground: 210 40% 98%;
+		--accent: 294, 56%, 96%;
+		--accent-foreground: 210 40% 98%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+		--destructive: 0 62.8% 30.6%;
+		--destructive-foreground: 210 40% 98%;
 
-    --border: 294, 56%, 96%;
-    --input: 294, 56%, 96%;
-    --ring: 212.7 26.8% 83.9%;
-  }
+		--border: 294, 56%, 96%;
+		--input: 294, 56%, 96%;
+		--ring: 212.7 26.8% 83.9%;
+	}
 }
-
-
 
 /* Custom scrollbar for #content-wrapper */
 ::-webkit-scrollbar {
-  width: 4px; /* Making the scrollbar thin */
+	width: 4px; /* Making the scrollbar thin */
 }
 
 ::-webkit-scrollbar-track {
-  background: black; /* Transparent track */
-  /* box-shadow: inset 0 0 0 2px white; */
+	background: black; /* Transparent track */
+	/* box-shadow: inset 0 0 0 2px white; */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: white; /* Use primary for the thumb */
-  border-radius: 40px; /* Optional: Adds roundness to the thumb */
+	background: white; /* Use primary for the thumb */
+	border-radius: 40px; /* Optional: Adds roundness to the thumb */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #761D99; /* Darken thumb on hover, adjust as needed */
+	background: #761d99; /* Darken thumb on hover, adjust as needed */
 }
 
 /* Firefox */
- * {
-  scrollbar-width: auto; /* "auto" or "thin" */
-  scrollbar-color: var(--primary) transparent; /* thumb and track color */
+* {
+	scrollbar-width: auto; /* "auto" or "thin" */
+	scrollbar-color: var(--primary) transparent; /* thumb and track color */
 }
 
 /* lesson styling */
 /*>>>>>>>>>>>>>>>>>>>>>>>>>*/
 .normie {
-  color: #26d153;
-  text-decoration: underline;
+	color: #26d153;
+	text-decoration: underline;
 }
 .amateur {
-  color: #3c7aca;
-  text-decoration: underline;
+	color: #3c7aca;
+	text-decoration: underline;
 }
 
 .expert {
-  color: #ca983c;
-  text-decoration: underline;
+	color: #ca983c;
+	text-decoration: underline;
 }
 
 .idolo {
-  color: #d01cd0;
-  text-decoration: underline;
+	color: #d01cd0;
+	text-decoration: underline;
 }
 
 .intermediate {
-  color: #a9c615;
-  text-decoration: underline;
+	color: #a9c615;
+	text-decoration: underline;
 }
-
 
 /*>>>>>>>>>>>>>>>>>>>>>>>>>*/
 
 /* custom scrollbar for tabslist*/
 .tabs-scrollbar::-webkit-scrollbar {
-  width: 2px;
-  height: 2px;
+	width: 2px;
+	height: 2px;
 }
 
 .tabs-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #fff;
-  border-radius: 10px;
+	background-color: #fff;
+	border-radius: 10px;
 }
 
 .tabs-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: #555;
+	background-color: #555;
 }
 
 .tabs-scrollbar::-webkit-scrollbar-track {
-  background-color: #000;
-  border-radius: 10px;
+	background-color: #000;
+	border-radius: 10px;
 }
 @layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+	* {
+		@apply border-border;
+	}
+	body {
+		@apply bg-background text-foreground;
+	}
 }
-
-
 
 /*loader*/
 .loader {
-  width: 48px;
-  height: 48px;
-  border: 5px solid #d01cd0;
-  border-radius: 50%;
-  display: inline-block;
-  box-sizing: border-box;
-  position: relative;
-  animation: pulse 1s linear infinite;
+	width: 48px;
+	height: 48px;
+	border: 5px solid #d01cd0;
+	border-radius: 50%;
+	display: inline-block;
+	box-sizing: border-box;
+	position: relative;
+	animation: pulse 1s linear infinite;
 }
 .loader:after {
-  content: '';
-  position: absolute;
-  width: 48px;
-  height: 48px;
-  border: 5px solid #d01cd0;
-  border-radius: 50%;
-  display: inline-block;
-  box-sizing: border-box;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  animation: scaleUp 1s linear infinite;
+	content: "";
+	position: absolute;
+	width: 48px;
+	height: 48px;
+	border: 5px solid #d01cd0;
+	border-radius: 50%;
+	display: inline-block;
+	box-sizing: border-box;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	animation: scaleUp 1s linear infinite;
 }
 
 @keyframes scaleUp {
-  0% { transform: translate(-50%, -50%) scale(0) }
-  60% , 100% { transform: translate(-50%, -50%)  scale(1)}
+	0% {
+		transform: translate(-50%, -50%) scale(0);
+	}
+	60%,
+	100% {
+		transform: translate(-50%, -50%) scale(1);
+	}
 }
 @keyframes pulse {
-  0% , 60% , 100%{ transform:  scale(1) }
-  80% { transform:  scale(1.2)}
+	0%,
+	60%,
+	100% {
+		transform: scale(1);
+	}
+	80% {
+		transform: scale(1.2);
+	}
+}
+
+@layer utilities {
+	input:-webkit-autofill {
+		@apply bg-transparent text-[#d01cd0]; /* Use Tailwind color classes here */
+		-webkit-box-shadow: 0 0 0px 1000px transparent inset;
+		-webkit-text-fill-color: #d01cd0;
+		transition: background-color 5000s ease-in-out 0s;
+	}
+
+	/* Dark mode styling for autofilled inputs */
+	.dark input:-webkit-autofill {
+		@apply bg-transparent text-[#d01cd0];
+		/* -webkit-box-shadow: 0 0 0px 1000px #1f2937 inset; */
+		/* Tailwind's gray-800 color */
+		-webkit-text-fill-color: white;
+	}
 }

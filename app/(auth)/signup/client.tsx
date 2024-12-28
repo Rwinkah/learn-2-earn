@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import IconPasswordInput from "@/app/_components/password-input";
 import axios from "axios";
 
 import {
@@ -20,6 +21,7 @@ import Link from "next/link";
 import { toast, ToastContainer } from "react-toastify";
 import { SignupSchema, signUpSchema } from "@/app/types";
 import { SignupHandler } from "@/app/utils/auth";
+import { Mail, User } from "lucide-react";
 // import 'react-toastify/dist/ReactToastify.css';
 const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -46,10 +48,12 @@ export default function SignupForm() {
 					name="displayName"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel className="font-medium text-sm">Display</FormLabel>
+							<FormLabel className="font-medium text-sm">Username</FormLabel>
 							<FormControl>
-								<Input
-									className="rounded-3xl bg-transparent border-gray-500 border-[1px] outline-none"
+								<IconPasswordInput
+									noPreview
+									LeftIcon={User}
+									className="rounded-[8px] h-14 bg-transparent border-gray-500 border-[1px] outline-none"
 									placeholder="vitalik"
 									{...field}
 								/>
@@ -65,8 +69,10 @@ export default function SignupForm() {
 						<FormItem>
 							<FormLabel className="font-medium text-sm">Email</FormLabel>
 							<FormControl>
-								<Input
-									className="rounded-3xl bg-transparent border-gray-500 border-[1px] outline-none"
+								<IconPasswordInput
+									noPreview
+									LeftIcon={Mail}
+									className="rounded-[8px] h-14 bg-transparent border-gray-500 border-[1px] outline-none"
 									placeholder="vitalikbut@gmail.com"
 									{...field}
 								/>
@@ -82,9 +88,8 @@ export default function SignupForm() {
 						<FormItem>
 							<FormLabel className="font-medium text-sm">Password</FormLabel>
 							<FormControl>
-								<Input
-									className="rounded-3xl bg-transparent border-gray-500 border-[1px] outline-none"
-									type="password"
+								<IconPasswordInput
+									className="rounded-[8px] h-14 bg-transparent border-gray-500 border-[1px] outline-none"
 									placeholder="************"
 									{...field}
 								/>
@@ -103,9 +108,8 @@ export default function SignupForm() {
 								Confirm Password
 							</FormLabel>
 							<FormControl>
-								<Input
-									className="rounded-3xl bg-transparent border-gray-500 border-[1px] outline-none"
-									type="password"
+								<IconPasswordInput
+									className="rounded-[8px] h-14 bg-transparent border-gray-500 border-[1px] outline-none"
 									placeholder="************"
 									{...field}
 								/>

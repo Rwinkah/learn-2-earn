@@ -1,13 +1,11 @@
 "use client";
-
-import { useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useAuth } from "../_context/auth-context";
-import { useUser } from "../_context/user-context";
-import { LoginSchema, loginSchema } from "../types";
-import { LoginHandler } from "../utils/auth";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/app/_context/auth-context";
+import { useUser } from "@/app/_context/user-context";
+import { User } from "lucide-react";
 import {
 	Form,
 	FormControl,
@@ -16,11 +14,14 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
-import IconPasswordInput from "./password-input";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+
+import { Input } from "@/components/ui/input";
+import Link from "next/link";
 import { ToastContainer } from "react-toastify";
-import { User } from "lucide-react";
+import { LoginSchema, loginSchema } from "@/app/types";
+import { useState } from "react";
+import { LoginHandler } from "@/app/utils/auth";
+import IconPasswordInput from "@/app/_components/password-input";
 
 export function LoginForm() {
 	const [isDisabled, setIsDisabled] = useState<boolean>(false);
@@ -51,9 +52,9 @@ export function LoginForm() {
 							<FormLabel className="font-medium text-sm">Username</FormLabel>
 							<FormControl>
 								<IconPasswordInput
-									noPreview
 									LeftIcon={User}
-									className="rounded-3xl bg-transparent border-gray-500 border-[1px] outline-none"
+									noPreview
+									className="rounded-[8px] bg-transparent border-gray-500 border-[1px] h-14 outline-none"
 									placeholder="vitalikbut@gmail.com"
 									{...field}
 								/>
@@ -70,7 +71,7 @@ export function LoginForm() {
 							<FormLabel className="font-medium text-sm"> Password</FormLabel>
 							<FormControl>
 								<IconPasswordInput
-									className="rounded-3xl h-10 bg-transparent border-gray-500 border-[1px] outline-none"
+									className="rounded-[8px] bg-transparent border-gray-500 border-[1px] h-14 outline-none"
 									type="password"
 									placeholder="************"
 									{...field}
