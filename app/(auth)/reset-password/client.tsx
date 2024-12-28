@@ -65,7 +65,8 @@ export default function Client() {
 					uid,
 					values.password,
 					token,
-					setIsDisabled
+					setIsDisabled,
+					router.push
 				); // Wait for the handler to finish
 				// You can optionally handle success here if needed
 			} catch (error) {

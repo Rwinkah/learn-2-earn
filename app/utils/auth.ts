@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import type { AxiosResponse } from "axios";
 
 import { LoginSchema, OnboardUser, SignupSchema } from "../types";
-import { promise } from "zod";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -145,7 +144,8 @@ export async function ResetConfirmHandler(
 	uid: string,
 	password: string,
 	token: string,
-	setIsDisabled: (value: boolean) => void
+	setIsDisabled: (value: boolean) => void,
+	push: (href: string, options?: any) => void
 ) {
 	setIsDisabled(true);
 	toast.promise(
@@ -166,8 +166,11 @@ export async function ResetConfirmHandler(
 			.then((response: AxiosResponse<AuthResponse>) => {
 				if (response.status === 200) {
 					setIsDisabled(false);
-					return response; // This will trigger the success handler
-				}
+					setTimeout(() => {
+						push("/login"); // Replace with your desired path
+					}, 2000);
+					return response
+\				}
 				// Handle different statuses and throw an error to trigger the error handler
 				if (response.status === 403) {
 					setIsDisabled(false);
