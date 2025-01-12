@@ -15,13 +15,12 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 
-import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { ToastContainer } from "react-toastify";
 import { LoginSchema, loginSchema } from "@/app/types";
 import { useState } from "react";
 import { LoginHandler } from "@/app/utils/auth";
-import IconPasswordInput from "@/app/_components/password-input";
+import IconInput from "@/app/_components/icon-input";
 
 export function LoginForm() {
 	const [isDisabled, setIsDisabled] = useState<boolean>(false);
@@ -49,10 +48,13 @@ export function LoginForm() {
 					name="username"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel className="font-medium text-sm">Username</FormLabel>
+							<FormLabel className="font-medium text-sm">
+								Username or Email
+							</FormLabel>
 							<FormControl>
-								<IconPasswordInput
+								<IconInput
 									LeftIcon={User}
+									type="text"
 									noPreview
 									className="rounded-[8px] bg-transparent border-gray-500 border-[1px] h-14 outline-none"
 									placeholder="vitalikbut@gmail.com"
@@ -70,7 +72,7 @@ export function LoginForm() {
 						<FormItem>
 							<FormLabel className="font-medium text-sm"> Password</FormLabel>
 							<FormControl>
-								<IconPasswordInput
+								<IconInput
 									className="rounded-[8px] bg-transparent border-gray-500 border-[1px] h-14 outline-none"
 									type="password"
 									placeholder="************"

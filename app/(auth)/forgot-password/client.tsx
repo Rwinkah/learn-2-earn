@@ -13,7 +13,7 @@ import {
 
 import { useState } from "react";
 import { ResetHandler } from "@/app/utils/auth";
-import IconPasswordInput from "@/app/_components/password-input";
+import IconInput from "@/app/_components/icon-input";
 import { Mail } from "lucide-react";
 import { ToastContainer } from "react-toastify";
 
@@ -58,7 +58,7 @@ export default function ForgotForm() {
 						<FormItem>
 							<FormLabel>Email</FormLabel>
 							<FormControl>
-								<IconPasswordInput
+								<IconInput
 									noPreview
 									LeftIcon={Mail}
 									className="border-2 h-14 rounded-[8px]"

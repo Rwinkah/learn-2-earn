@@ -12,7 +12,7 @@ import {
 	FormItem,
 	FormLabel,
 } from "@/components/ui/form";
-import IconPasswordInput from "@/app/_components/password-input";
+import IconInput from "@/app/_components/icon-input";
 import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
@@ -107,7 +107,7 @@ export default function Client() {
 								<FormItem>
 									<FormLabel className="font-medium">New password</FormLabel>
 									<FormControl>
-										<IconPasswordInput
+										<IconInput
 											className="border-2 h-14 rounded-[8px]"
 											placeholder="Enter your new password"
 											{...field}
@@ -131,7 +131,7 @@ export default function Client() {
 									</FormLabel>
 
 									<FormControl>
-										<IconPasswordInput
+										<IconInput
 											className="border-2 h-14 rounded-[8px]"
 											placeholder="Confirm your new password"
 											{...field}

@@ -4,7 +4,7 @@ import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { Lock } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-interface IconPasswordInput
+interface IconInputType
 	extends Omit<
 		React.InputHTMLAttributes<HTMLInputElement>,
 		"className" | "placeholder"
@@ -16,7 +16,7 @@ interface IconPasswordInput
 	noPreview?: boolean;
 }
 
-export default function IconPasswordInput(props: IconPasswordInput) {
+export default function IconInput(props: IconInputType) {
 	useEffect(() => {
 		if (props.noPreview) {
 			setIsPasswordVisible(true);
@@ -24,6 +24,14 @@ export default function IconPasswordInput(props: IconPasswordInput) {
 	}, [props.noPreview]);
 
 	const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+	function InputType() {
+		if (props.type) {
+			return props.type;
+		}
+
+		return isPasswordVisible ? "text" : "password";
+	}
 
 	const togglePasswordVisibility = () => {
 		setIsPasswordVisible(!isPasswordVisible);
@@ -40,7 +48,8 @@ export default function IconPasswordInput(props: IconPasswordInput) {
 			) : null}{" "}
 			<Input
 				{...props}
-				type={isPasswordVisible ? "text" : "password"}
+				// type={isPasswordVisible ? "text" : "password"}
+				type={InputType()}
 				placeholder={props.placeholder ?? "Enter your password"}
 				className="pr-10 bg-transparent h-full  border-none" // Add padding to the right to make room for the icon
 			/>

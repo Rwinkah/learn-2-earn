@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import IconPasswordInput from "@/app/_components/password-input";
+import IconInput from "@/app/_components/icon-input";
 import axios from "axios";
 
 import {
@@ -50,7 +50,7 @@ export default function SignupForm() {
 						<FormItem>
 							<FormLabel className="font-medium text-sm">Username</FormLabel>
 							<FormControl>
-								<IconPasswordInput
+								<IconInput
 									noPreview
 									LeftIcon={User}
 									className="rounded-[8px] h-14 bg-transparent border-gray-500 border-[1px] outline-none"
@@ -69,8 +69,9 @@ export default function SignupForm() {
 						<FormItem>
 							<FormLabel className="font-medium text-sm">Email</FormLabel>
 							<FormControl>
-								<IconPasswordInput
+								<IconInput
 									noPreview
+									type="email"
 									LeftIcon={Mail}
 									className="rounded-[8px] h-14 bg-transparent border-gray-500 border-[1px] outline-none"
 									placeholder="vitalikbut@gmail.com"
@@ -88,7 +89,7 @@ export default function SignupForm() {
 						<FormItem>
 							<FormLabel className="font-medium text-sm">Password</FormLabel>
 							<FormControl>
-								<IconPasswordInput
+								<IconInput
 									className="rounded-[8px] h-14 bg-transparent border-gray-500 border-[1px] outline-none"
 									placeholder="************"
 									{...field}
@@ -108,7 +109,7 @@ export default function SignupForm() {
 								Confirm Password
 							</FormLabel>
 							<FormControl>
-								<IconPasswordInput
+								<IconInput
 									className="rounded-[8px] h-14 bg-transparent border-gray-500 border-[1px] outline-none"
 									placeholder="************"
 									{...field}

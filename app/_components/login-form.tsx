@@ -16,7 +16,7 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
-import IconPasswordInput from "./password-input";
+import IconInput from "./icon-input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { ToastContainer } from "react-toastify";
@@ -50,7 +50,7 @@ export function LoginForm() {
 						<FormItem>
 							<FormLabel className="font-medium text-sm">Username</FormLabel>
 							<FormControl>
-								<IconPasswordInput
+								<IconInput
 									noPreview
 									LeftIcon={User}
 									className="rounded-3xl bg-transparent border-gray-500 border-[1px] outline-none"
@@ -69,7 +69,7 @@ export function LoginForm() {
 						<FormItem>
 							<FormLabel className="font-medium text-sm"> Password</FormLabel>
 							<FormControl>
-								<IconPasswordInput
+								<IconInput
 									className="rounded-3xl h-10 bg-transparent border-gray-500 border-[1px] outline-none"
 									type="password"
 									placeholder="************"
