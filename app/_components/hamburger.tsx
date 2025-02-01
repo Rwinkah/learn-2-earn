@@ -21,6 +21,7 @@ import GearIcon from "@radix-ui/react-icons";
 import OnboardMeMessageIcon from "@/assets/images/onboardMeMessageIcon";
 import { useUser } from "../_context/user-context";
 import { useAuth } from "../_context/auth-context";
+import OnboardMeLeaderboardIcon from "@/assets/images/onboardMeLeaderboardIcon";
 export default function Hamburger() {
 	const [open, setOpen] = useState(false);
 	const { onboardUser, updateUser } = useUser();
@@ -99,6 +100,14 @@ export default function Hamburger() {
 								href={"/"}>
 								<OnboardMeRewardIcon size={24} />
 								Reward System
+							</Link>
+							<Link
+								key="leaderboard"
+								className=" w-full items-center  flex gap-2"
+								onClick={handleLinkClick}
+								href={"/leaderboard"}>
+								<OnboardMeLeaderboardIcon size={24} />
+								Leaderboard
 							</Link>
 							<Link
 								key="messages"

@@ -55,7 +55,7 @@ export default function Page() {
 							</TabsTrigger>
 						</TabsList>
 
-						<div className="flex-col lg:h-[700px] overflow-y-scroll">
+						<div className="flex-col h-[400px] md:h-[550px]  lg:pb-0 lg:h-[700px] overflow-y-scroll">
 							{" "}
 							<TabsContent
 								value="weekly"
@@ -64,7 +64,7 @@ export default function Page() {
 									(object: WeeklyLeaderboardResponse, index: any) => (
 										<div
 											key={index}
-											className="flex flex-col gap-4 mt-5 w-full items-center px-10">
+											className="flex flex-col pb-10 gap-4 mt-5 w-full items-center px-10">
 											{" "}
 											<div
 												key={index}
@@ -84,7 +84,7 @@ export default function Page() {
 									(object: LeaderboardUser, index: number) => (
 										<div
 											key={index}
-											className="flex flex-col gap-4 mt-5 w-full items-center px-10">
+											className="flex pb-10 flex-col gap-4 mt-5 w-full items-center px-10">
 											{" "}
 											<div
 												key={index}
