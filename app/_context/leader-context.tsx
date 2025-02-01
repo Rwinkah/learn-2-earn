@@ -10,7 +10,8 @@ import React, {
 import { LeaderboardUser } from "../types";
 interface LeaderboardContextType {
 	Leaderboard: LeaderboardUser[];
-	updateLeaderBoard: (leaderboardData: any) => void;
+	WeeklyLeaderboard: WeeklyLeaderboardResponse[];
+	updateLeaderBoard: (leaderboardData: any, weeklyData: any) => void;
 }
 const LeaderboardContext = createContext<LeaderboardContextType | undefined>(
 	undefined
@@ -20,20 +21,23 @@ const LeaderboardProvider: React.FC<{ children: ReactNode }> = ({
 	children,
 }) => {
 	const [Leaderboard, setLeaderboard] = useState<any[]>([]);
+	const [WeeklyLeaderboard, setWeeklyboard] = useState<any[]>([]);
 
-	const updateLeaderBoard = (LeaderboardData: any) => {
+	const updateLeaderBoard = (LeaderboardData: any, weeklyData: any) => {
 		setLeaderboard(LeaderboardData);
+		setWeeklyboard(weeklyData);
 	};
 
 	const value = useMemo(
-		() => ({ Leaderboard, updateLeaderBoard }),
+		() => ({ Leaderboard, WeeklyLeaderboard, updateLeaderBoard }),
 		[Leaderboard]
 	);
 
 	useEffect(() => {
 		const leaderboard = localStorage.getItem("leaderboard"); // Or use cookies
-		if (leaderboard) {
-			updateLeaderBoard(leaderboard);
+		const weeklyboard = localStorage.getItem("weeklyleaderboard");
+		if (leaderboard && weeklyboard) {
+			updateLeaderBoard(leaderboard, weeklyboard);
 		}
 	}, []);
 

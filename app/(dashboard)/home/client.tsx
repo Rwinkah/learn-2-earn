@@ -10,10 +10,15 @@ import axios from "axios";
 import { useLesson } from "@/app/_context/lesson-context";
 import { useLeaderboard } from "@/app/_context/leader-context";
 import { LeaderboardUser, Lesson } from "@/app/types";
+import { LeaderboardService } from "@/app/utils/services";
 
 export default function Dashboard() {
+	const LeaderBoardService = new LeaderboardService();
 	const [lessonData, setLessonData] = useState<Lesson[]>([]);
 	const [leaderboard, setLeaderboard] = useState<LeaderboardUser[]>([]);
+	const [weeklyboard, setWeeklyboard] = useState<WeeklyLeaderboardResponse[]>(
+		[]
+	);
 	const { push } = useRouter();
 	const { updateLesson, allLessons } = useLesson();
 	const { updateLeaderBoard, Leaderboard } = useLeaderboard();
@@ -27,10 +32,13 @@ export default function Dashboard() {
 		console.log(data);
 		console.log(allLessons);
 	};
-	const updateLeaderBoardData = (data: any) => {
+	const updateLeaderBoardData = (data: any, weeklyData: any) => {
 		setLeaderboard(data);
 		sessionStorage.setItem("leaderboard", JSON.stringify(data));
-		updateLeaderBoard(data);
+		setWeeklyboard(weeklyData);
+		console.log(weeklyData);
+		sessionStorage.setItem("weeklyleaderboard", JSON.stringify(weeklyData));
+		updateLeaderBoard(data, weeklyData);
 		console.log(data);
 		console.log(Leaderboard);
 	};
@@ -88,23 +96,18 @@ export default function Dashboard() {
 
 		const fetchLeaderboard = async () => {
 			try {
-				const leaderboardResponse = await axios.get(
-					`${apiUrl}/get-leaderboard`,
-					{
-						headers: {
-							Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-						},
-					}
-				);
-				updateLeaderBoardData(leaderboardResponse.data);
+				const leaderboardResponse = await LeaderBoardService.GETLeaderboard();
+				const weeeklyboardResponse =
+					await LeaderBoardService.GETWeeklyLeaderbard();
+				updateLeaderBoardData(leaderboardResponse, weeeklyboardResponse);
 			} catch (error) {
-				console.log("Error fetching leaderboard", error);
+				console.log("Error fetching leaderboard data", error);
 			}
 		};
 
 		fetchLeaderboard();
 		fetchLessonData();
-	}, []);
+	});
 
 	return (
 		<div className="flex-col flex-shrink w-full h-[100vh]  text-black">

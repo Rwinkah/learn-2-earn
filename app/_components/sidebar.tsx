@@ -14,6 +14,7 @@ import { useState } from "react";
 import OnboardMeTracksIcon from "@/assets/images/onboardMeTracks";
 import OnboardMeRewardIcon from "@/assets/images/onboardMeRewardIcon";
 import Image from "next/image";
+import OnboardMeLeaderboardIcon from "@/assets/images/onboardMeLeaderboardIcon";
 
 export default function Sidebar() {
 	const pathname = usePathname();
@@ -132,6 +133,23 @@ export default function Sidebar() {
 										}
 									/>
 									Reward System
+								</Button>
+							</Link>
+							<Link href="/leaderboard">
+								<Button
+									// onClick={() => handleNavClick("rewards")}
+									variant={
+										pathname.includes("leaderboard")
+											? "activeSidebar"
+											: "ghostSidebar"
+									}
+									className={`w-full  flex gap-[12px] flex-wrap rounded-xl  items-center justify-normal   `}>
+									<OnboardMeLeaderboardIcon
+										pathFill={
+											pathname.includes("leaderboard") ? "#C455FF" : "#8D8990"
+										}
+									/>
+									Leaderboard
 								</Button>
 							</Link>
 							<Link href="">

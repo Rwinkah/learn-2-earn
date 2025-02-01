@@ -3,3 +3,8 @@ interface AuthResponse {
 	message?: string;
 	error?: string;
 }
+
+interface WeeklyLeaderboardResponse {
+	username: string;
+	total_xp: number;
+}

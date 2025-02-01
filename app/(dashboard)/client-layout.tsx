@@ -3,17 +3,11 @@ import Image from "next/image";
 import Footer from "../_components/footer";
 import RespContainer from "../_components/resp_container";
 import Sidebar from "../_components/sidebar";
-import { BookIcon, BookXIcon, UserCircle } from "lucide-react";
 import Header from "../_components/header";
-import Link from "next/link";
-import { GearIcon, HomeIcon } from "@radix-ui/react-icons";
 import eth from "@/public/eth.jpeg";
-import axios from "axios";
-import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
 import { useUser } from "../_context/user-context";
 import { useLeaderboard } from "../_context/leader-context";
-import { LeaderboardUser, OnboardUser } from "../types";
+import { LeaderboardUser } from "../types";
 export default function ClientLayout({
 	children,
 }: {

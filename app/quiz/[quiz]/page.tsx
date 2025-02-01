@@ -35,10 +35,14 @@ export default function Page({ params }: { params: { quiz: string } }) {
 	const lessonData = allLessons.find(
 		(lesson) => lesson.id.toString() === currentLesson
 	);
+
 	console.log(lessonData);
 	if (!lessonData) {
 		return <div className="loader"></div>;
 	}
+
+	const quizLength = lessonData.quiz.length;
+	const passPercent = Math.floor(0.7 * quizLength);
 
 	const handleSubmit = async () => {
 		setIsWaiting(true);
@@ -50,7 +54,7 @@ export default function Page({ params }: { params: { quiz: string } }) {
 		console.log(`Final Score: ${finalScore}`);
 		setSubmitted(true);
 
-		if (finalScore > 7) {
+		if (finalScore >= passPercent) {
 			try {
 				const refreshToken = localStorage.getItem("refresh_token");
 
@@ -147,12 +151,15 @@ export default function Page({ params }: { params: { quiz: string } }) {
 			</h1>
 			<h2 className="text-white text-2xl font-semibold">{lessonData.title}</h2>
 			<div className="flex flex-col justify-between pb-20 h-full mt-10 lg:mt-40 text-3xl  text-white md:w-full text-wrap w-4/5 font-semibold text-center">
-				{score < 8 ? (
+				{score < passPercent ? (
 					<div className="flex flex-col w-full items-center justify-center   gap-8">
 						<div className="flex flex-col  min-h-[50vh] p-8	  gap-8">
-							<h3> Scored less than 80%, try again </h3>
+							<h3> Scored less than 70%, try again </h3>
 							<h4>
-								Score: <span className="text-red-700">{score}/10</span>
+								Score:{" "}
+								<span className="text-red-700">
+									{score}/{quizLength}
+								</span>
 							</h4>
 						</div>
 					</div>
@@ -161,19 +168,17 @@ export default function Page({ params }: { params: { quiz: string } }) {
 						<div className="flex flex-col  min-h-[50vh] 	  gap-8">
 							<h3 className="text-[24px]"> You passed!</h3>
 							<h4 className="font-medium text-[24px]">
-								Score: <span className="text-green-700">{score}/10</span>
+								Score:{" "}
+								<span className="text-green-700">
+									{score}/{quizLength}
+								</span>
 							</h4>
 							{isWaiting ? (
 								<div className="text-xl">
 									<div className="loading" />
 								</div>
 							) : (
-								<div className="flex text-xl justify-center items-center gap-4">
-									<span className="text- text-primaryLight t	">
-										{addedOxp} OXP
-									</span>
-									acquired!
-								</div>
+								<div className="flex text-xl justify-center items-center gap-4"></div>
 							)}
 						</div>
 					</div>

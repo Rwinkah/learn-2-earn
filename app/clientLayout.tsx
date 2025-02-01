@@ -55,6 +55,8 @@ export default function ClientLayout({
 		const storedUserData = Cookies.get("user");
 		const storedLesson = sessionStorage.getItem("lessons");
 		const storedLeaderboard = sessionStorage.getItem("leaderboard");
+		const storedWeeklyLeaderboard = sessionStorage.getItem("weeklyleaderboard");
+		let parsedWeeklyLeaderboard = [];
 
 		if (storedUserData) {
 			const parsedUserData = JSON.parse(storedUserData);
@@ -65,9 +67,13 @@ export default function ClientLayout({
 			const parsedLessonData = JSON.parse(storedLesson);
 			lesson.updateLesson(parsedLessonData);
 		}
+
+		if (storedWeeklyLeaderboard) {
+			parsedWeeklyLeaderboard = JSON.parse(storedWeeklyLeaderboard);
+		}
 		if (storedLeaderboard) {
 			const parsedLeaderboard = JSON.parse(storedLeaderboard);
-			leaderboard.updateLeaderBoard(parsedLeaderboard);
+			leaderboard.updateLeaderBoard(parsedLeaderboard, parsedWeeklyLeaderboard);
 		}
 	}
 
