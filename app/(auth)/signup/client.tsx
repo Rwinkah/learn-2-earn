@@ -51,8 +51,8 @@ export default function SignupForm() {
 							<FormLabel className="font-medium text-sm">Username</FormLabel>
 							<FormControl>
 								<IconInput
-									noPreview
-									LeftIcon={User}
+									nopreview
+									leftIcon={User}
 									className="rounded-[8px] h-14 bg-transparent border-gray-500 border-[1px] outline-none"
 									placeholder="vitalik"
 									{...field}
@@ -70,9 +70,9 @@ export default function SignupForm() {
 							<FormLabel className="font-medium text-sm">Email</FormLabel>
 							<FormControl>
 								<IconInput
-									noPreview
+									nopreview
 									type="email"
-									LeftIcon={Mail}
+									leftIcon={Mail}
 									className="rounded-[8px] h-14 bg-transparent border-gray-500 border-[1px] outline-none"
 									placeholder="vitalikbut@gmail.com"
 									{...field}
