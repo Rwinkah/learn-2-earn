@@ -53,9 +53,9 @@ export function LoginForm() {
 							</FormLabel>
 							<FormControl>
 								<IconInput
-									LeftIcon={User}
+									leftIcon={User}
 									type="text"
-									noPreview
+									nopreview={true}
 									className="rounded-[8px] bg-transparent border-gray-500 border-[1px] h-14 outline-none"
 									placeholder="vitalikbut@gmail.com"
 									{...field}
