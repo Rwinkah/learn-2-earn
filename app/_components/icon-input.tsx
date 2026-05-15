@@ -1,65 +1,70 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "../../components/ui/input";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { Lock } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-interface IconInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface IconInputType
+	extends Omit<
+		React.InputHTMLAttributes<HTMLInputElement>,
+		"className" | "placeholder"
+	> {
 	className?: string;
 	noLeft?: boolean;
-	leftIcon?: LucideIcon;
-	nopreview?: boolean;
+	LeftIcon?: LucideIcon;
+	placeholder?: string;
+	noPreview?: boolean;
 }
 
-const IconInput = React.forwardRef<HTMLInputElement, IconInputProps>(
-	({ className, noLeft, leftIcon, nopreview, type, ...props }, ref) => {
-		const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+export default function IconInput(props: IconInputType) {
+	useEffect(() => {
+		if (props.noPreview) {
+			setIsPasswordVisible(true);
+		}
+	}, [props.noPreview]);
 
-		useEffect(() => {
-			if (nopreview) {
-				setIsPasswordVisible(true);
-			}
-		}, [nopreview]);
+	const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
-		const togglePasswordVisibility = () => {
-			setIsPasswordVisible((visible) => !visible);
-		};
+	function InputType() {
+		if (props.type) {
+			return props.type;
+		}
 
-		return (
-			<div
-				className={`${className} flex items-center justify-center p-2 relative border-0 w-full`}>
-				{!noLeft && (
-					<div className="ml-4">
-						{leftIcon ? (
-							React.createElement(leftIcon, { size: 20 })
-						) : (
-							<Lock size={20} />
-						)}
-					</div>
-				)}
-				<Input
-					{...props}
-					ref={ref}
-					type={isPasswordVisible ? "text" : "password"}
-					className="pr-10 bg-transparent h-full border-none w-full"
-				/>
-				{!nopreview && (
-					<button
-						type="button"
-						onClick={togglePasswordVisibility}
-						className="hover:border-none bg-transparent focus:outline-none flex items-center pr-4 text-gray-500">
-						{isPasswordVisible ? (
-							<EyeOffIcon className="w-5 h-5" />
-						) : (
-							<EyeIcon className="w-5 h-5" />
-						)}
-					</button>
-				)}
-			</div>
-		);
+		return isPasswordVisible ? "text" : "password";
 	}
-);
 
-IconInput.displayName = "IconInput";
-
-export default IconInput;
+	const togglePasswordVisibility = () => {
+		setIsPasswordVisible(!isPasswordVisible);
+	};
+	return (
+		<div
+			className={`${props.className} flex items-center justify-center p-2relative border-0 w-full`}>
+			{props.noLeft !== true ? (
+				props.LeftIcon ? (
+					<props.LeftIcon className="ml-4" size={20} />
+				) : (
+					<Lock className="ml-4" size={20} /> // Render Lock by default
+				)
+			) : null}{" "}
+			<Input
+				{...props}
+				// type={isPasswordVisible ? "text" : "password"}
+				type={InputType()}
+				placeholder={props.placeholder ?? "Enter your password"}
+				className="pr-10 bg-transparent h-full  border-none" // Add padding to the right to make room for the icon
+			/>
+			{!props.noPreview && (
+				<button
+					type="button"
+					onClick={togglePasswordVisibility}
+					className=" hover:border-none  bg-transparent focus:outline-none  flex items-center pr-4 text-gray-500">
+					{isPasswordVisible ? (
+						<EyeOffIcon className="w-5 h-5" />
+					) : (
+						<EyeIcon className="w-5 h-5" />
+					)}
+				</button>
+			)}
+		</div>
+	);
+}

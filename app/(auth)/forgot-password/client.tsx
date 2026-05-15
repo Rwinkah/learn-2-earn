@@ -59,8 +59,8 @@ export default function ForgotForm() {
 							<FormLabel>Email</FormLabel>
 							<FormControl>
 								<IconInput
-									nopreview={true}
-									leftIcon={Mail}
+									noPreview
+									LeftIcon={Mail}
 									className="border-2 h-14 rounded-[8px]"
 									placeholder="email@example.com"
 									type="email"
