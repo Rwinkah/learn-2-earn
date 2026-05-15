@@ -19,7 +19,6 @@ export default function ClientLayout({
 	const lesson = useLesson();
 	const leaderboard = useLeaderboard();
 
-
 	const handleWebSocketMessage = useCallback(
 		(event: MessageEvent) => {
 			const data = JSON.parse(event.data);
@@ -70,24 +69,12 @@ export default function ClientLayout({
 		}
 
 		if (storedWeeklyLeaderboard) {
-			try {
-				parsedWeeklyLeaderboard = JSON.parse(storedWeeklyLeaderboard);
-			} catch (error) {
-				console.error("Error parsing weekly leaderboard:", error);
-				sessionStorage.removeItem("weeklyleaderboard"); // Optional: clean bad data
-			}
-}
-			if (storedLeaderboard && storedLeaderboard !== "undefined") {
-	try {
-		const parsedLeaderboard = JSON.parse(storedLeaderboard);
-		leaderboard.updateLeaderBoard(parsedLeaderboard, parsedWeeklyLeaderboard);
-	} catch (error) {
-		console.error("Error parsing leaderboard:", error);
-		sessionStorage.removeItem("leaderboard"); // optional: remove invalid data
-	}
-}
-
-
+			parsedWeeklyLeaderboard = JSON.parse(storedWeeklyLeaderboard);
+		}
+		if (storedLeaderboard) {
+			const parsedLeaderboard = JSON.parse(storedLeaderboard);
+			leaderboard.updateLeaderBoard(parsedLeaderboard, parsedWeeklyLeaderboard);
+		}
 	}
 
 	useEffect(() => {
